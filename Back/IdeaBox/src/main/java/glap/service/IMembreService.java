@@ -2,5 +2,4 @@ package glap.service;
 
 public interface IMembreService {
 	//Modifier
-	void test();
 }
