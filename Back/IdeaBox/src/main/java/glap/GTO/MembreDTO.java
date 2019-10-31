@@ -7,6 +7,6 @@ package glap.GTO;
  * @author alban
  *
  */
-public class MembreGTO {
+public class MembreDTO {
 
 }

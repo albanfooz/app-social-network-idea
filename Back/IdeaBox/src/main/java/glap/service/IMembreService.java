@@ -1,6 +1,6 @@
 package glap.service;
 
-import glap.GTO.MembreGTO;
+import glap.GTO.MembreDTO;
 
 /**
  * Interface de MembreService
@@ -15,8 +15,8 @@ public interface IMembreService {
 	 * Modifier le Membre
 	 *
 	 * @param id        du membre à modifier dans la base
-	 * @param membreGTO à remplacer à l'id
-	 * @return membreGTO si OK, null sinon
+	 * @param membreDTO à remplacer à l'id
+	 * @return membreDTO si OK, null sinon
 	 */
-	public MembreGTO update(Integer id, MembreGTO membreGTO);
+	public MembreDTO update(Integer id, MembreDTO membreDTO);
 }
