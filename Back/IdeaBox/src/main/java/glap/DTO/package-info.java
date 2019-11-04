@@ -5,4 +5,4 @@
  * @author alban
  *
  */
-package glap.GTO;
+package glap.DTO;
