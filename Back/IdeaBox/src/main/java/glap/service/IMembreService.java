@@ -1,6 +1,6 @@
 package glap.service;
 
-import glap.GTO.MembreDTO;
+import glap.DTO.MembreDTO;
 
 /**
  * Interface de MembreService
