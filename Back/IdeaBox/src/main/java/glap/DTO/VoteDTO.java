@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VoteDTO {
 	private Integer id;
-
+	private byte positif;
 }

@@ -1,8 +1,10 @@
 package glap.service;
 
+import glap.DTO.CommentaireDTO;
+
 public interface ICommentaire {
 	//ajouter un commentaire
-	public String add(String com);
+	public CommentaireDTO add(CommentaireDTO com);
 
 	//supprimer un commentaire
 	public void delete();
