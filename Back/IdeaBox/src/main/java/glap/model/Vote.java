@@ -36,8 +36,8 @@ public class Vote implements Serializable {
 	@Column(name="created_at", nullable=false)
 	private Date createdAt;
 
-	//TODO a verifier, de base byte
-	private boolean positif;
+
+	private Boolean positif;
 
 	//bi-directional many-to-one association to Commentaire
 	@ManyToOne(fetch=FetchType.LAZY)
