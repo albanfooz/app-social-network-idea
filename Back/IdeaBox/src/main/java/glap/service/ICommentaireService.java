@@ -2,7 +2,7 @@ package glap.service;
 
 import glap.DTO.CommentaireDTO;
 
-public interface ICommentaire {
+public interface ICommentaireService {
 	//ajouter un commentaire
 	public CommentaireDTO add(CommentaireDTO com);
 
