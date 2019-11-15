@@ -13,10 +13,13 @@ import glap.model.Commentaire;
 @Service
 public class CommentaireService implements ICommentaireService {
 
+	//TODO : continuer cette methode
 	@Override
 	public CommentaireDTO add(CommentaireDTO com) {
 		Commentaire comModel = new Commentaire();
-		comModel.set(com.get());
+		comModel.setCreatedAt(com.getCreatedAt());
+		comModel.setContenu(com.getContenu());
+		comModel.setMembre(com.getIdMembre());
 		//tModel.setUser(u);
 		tchateurRepository.save(comModel);
 

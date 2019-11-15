@@ -189,4 +189,12 @@ public class Commentaire implements Serializable {
 		return vote;
 	}
 
+	public String getContenu() {
+		return this.contenu;
+	}
+
+	public void setContenu(String contenu) {
+		this.contenu = contenu;
+	}
+
 }
