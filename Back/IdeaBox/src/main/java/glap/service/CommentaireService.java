@@ -21,7 +21,13 @@ public class CommentaireService implements ICommentaireService {
 	@Override
 	public CommentaireDTO add(CommentaireDTO com) {
 		Commentaire comModel = new Commentaire();
+
 		comModel.setContenu(com.getContenu());
+		// code pour test
+		comModel.setCreatedAt(com.getCreatedAt());
+		comModel.setIdee(com.getIdee());
+		comModel.setMembre(com.getMembre());
+		//fin code pour test
 		this.commentaireRepository.save(comModel);
 		com.setId(comModel.getId());
 		return com;
@@ -40,6 +46,5 @@ public class CommentaireService implements ICommentaireService {
 		c.setId(result.getId());
 		return result;
 	}
-
 
 }

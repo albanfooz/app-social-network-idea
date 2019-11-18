@@ -20,7 +20,7 @@ import glap.service.CommentaireService;
 @RestController
 @RequestMapping("/commentaires")
 public class CommentaireController {
-	private CommentaireService userService;
+	private CommentaireService commentaireService;
 
 	@GetMapping
 	public List<Commentaire> findAll() {
@@ -31,7 +31,8 @@ public class CommentaireController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public CommentaireDTO save(@RequestBody CommentaireDTO m) {
-		return m;
+		CommentaireDTO result= this.commentaireService.add(m);
+		return result;
 	}
 
 	/**
