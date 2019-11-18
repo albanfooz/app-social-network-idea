@@ -1,9 +1,11 @@
 package glap.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import glap.DTO.CommentaireDTO;
 import glap.model.Commentaire;
+import glap.repository.CommentaireRepository;
 
 /**
  *
@@ -13,18 +15,15 @@ import glap.model.Commentaire;
 @Service
 public class CommentaireService implements ICommentaireService {
 
-	//TODO : continuer cette methode
+	@Autowired
+	private CommentaireRepository commentaireRepository;
+
 	@Override
 	public CommentaireDTO add(CommentaireDTO com) {
 		Commentaire comModel = new Commentaire();
-		comModel.setCreatedAt(com.getCreatedAt());
 		comModel.setContenu(com.getContenu());
-		comModel.setMembre(com.getIdMembre());
-		//tModel.setUser(u);
-		tchateurRepository.save(comModel);
-
-		tDto.setId(tModel.getId());
-
+		this.commentaireRepository.save(comModel);
+		com.setId(comModel.getId());
 		return com;
 	}
 
@@ -35,9 +34,11 @@ public class CommentaireService implements ICommentaireService {
 	}
 
 	@Override
-	public String update(String com) {
-		// TODO Auto-generated method stub
-		return null;
+	public Commentaire update(CommentaireDTO c, String message) {
+		Commentaire com= new Commentaire ();
+		Commentaire result=this.commentaireRepository.updateMessage(com, message);
+		c.setId(result.getId());
+		return result;
 	}
 
 

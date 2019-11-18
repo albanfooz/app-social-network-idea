@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import glap.DTO.CommentaireDTO;
 import glap.model.Commentaire;
+import glap.service.CommentaireService;
 
 @RestController
 @RequestMapping("/commentaires")
 public class CommentaireController {
+	private CommentaireService userService;
 
 	@GetMapping
 	public List<Commentaire> findAll() {
@@ -27,7 +30,7 @@ public class CommentaireController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Commentaire save(@RequestBody Commentaire m) {
+	public CommentaireDTO save(@RequestBody CommentaireDTO m) {
 		return m;
 	}
 
