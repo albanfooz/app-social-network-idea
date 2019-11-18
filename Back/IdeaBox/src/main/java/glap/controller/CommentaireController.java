@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import glap.DTO.CommentaireDTO;
 import glap.model.Commentaire;
-import glap.service.CommentaireService;
+import glap.service.impl.CommentaireService;
 
 @RestController
 @RequestMapping("/commentaires")
@@ -25,6 +25,7 @@ public class CommentaireController {
 	@GetMapping
 	public List<Commentaire> findAll() {
 		List<Commentaire> result = new ArrayList<>();
+
 		return result;
 	}
 

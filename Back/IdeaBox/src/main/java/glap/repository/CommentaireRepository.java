@@ -44,10 +44,10 @@ public class CommentaireRepository {
 	}
 
 	//trouver tous les commentaires d'un membre liés à un autre commentaire
-	public List<Commentaire> findByCommentaireId(Commentaire c) {
+	public List<Commentaire> findByCommentaireId(Integer id) {
 		List<Commentaire> result = new ArrayList<>();
 		TypedQuery<Commentaire> query = this.em.createQuery("SELECT * FROM Commentaire c where c.commentaire_id=id",Commentaire.class);
-		query.setParameter("id", c.getId());
+		query.setParameter("id", id);
 		result= query.getResultList();
 		return result;
 	}

@@ -9,7 +9,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import glap.DTO.CommentaireDTO;
 import glap.model.Idee;
 import glap.model.Membre;
-import glap.service.CommentaireService;
+import glap.service.impl.CommentaireService;
 
 @SpringBootApplication
 public class IdeaBoxApplication {
