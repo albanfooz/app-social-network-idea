@@ -29,9 +29,8 @@ public interface IMembreService {
 	 */
 	public MembreDTO add(MembreDTO membreDTO) ;
 	/**
-	 * Ajouter le Membre
+	 * Afficher les Membres
 	 *
-	 * @param membreDTO à ajouter
 	 * @return List<membreDTO> si OK, null sinon
 	 */
 	public List<MembreDTO> recupererAll();
