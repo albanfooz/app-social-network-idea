@@ -12,33 +12,34 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import glap.model.Commentaire;
+import glap.model.Idee;
 
 @Repository
 @Transactional
-public class CommentaireRepository {
+public class IdeeRepository {
 	@PersistenceContext
 	private EntityManager em;
 
-	public CommentaireRepository() {
+	public IdeeRepository() {
+	}
+	//ajouter une idée
+	public void save(Idee i) {
+		this.em.persist(i);
 	}
 
-	//ajouter un commentaire
-	public void save(Commentaire c) {
-		this.em.persist(c);
-	}
-
-	//supprimer un commentaire
-	public Integer delete(Commentaire c) {
-		Query query = this.em.createQuery("DELETE FROM Commentaire c where c.id=:id");
-		query.setParameter("id", c.getId());
+	//supprimer une idée
+	public Integer delete(Idee i) {
+		Query query = this.em.createQuery("DELETE FROM Idee i where i.id=:id");
+		query.setParameter("id", i.getId());
 		Integer result = query.executeUpdate();
 		return result;
 	}
 
-	//modifier un commentaire
-	public Commentaire updateMessage(Commentaire c, String message) {
-		Commentaire result = this.em.find(Commentaire.class,c.getId());
-		result.setContenu(message);
+	//modifier une idée
+	public int update(Integer id, Idee i) {
+		Query query = this.em.createQuery("Update Idee i Set i.description=:description, i.titre=:titre, i. WHERE i.id=:id");
+		query.setParameter("description", i.getDescription());
+		int result = query.executeUpdate();
 		return result;
 	}
 
@@ -46,15 +47,6 @@ public class CommentaireRepository {
 	public List<Commentaire> findByCommentaireId(Integer id) {
 		List<Commentaire> result = new ArrayList<>();
 		TypedQuery<Commentaire> query = this.em.createQuery("SELECT * FROM Commentaire c where c.commentaire_id=:id",Commentaire.class);
-		query.setParameter("id", id);
-		result= query.getResultList();
-		return result;
-	}
-
-	//Trouver les comentaires liés à une idée
-	public List<Commentaire> findByIdeeId(Integer id) {
-		List<Commentaire> result = new ArrayList<>();
-		TypedQuery<Commentaire> query = this.em.createQuery("SELECT * FROM Commentaire c where c.idee_id=:id",Commentaire.class);
 		query.setParameter("id", id);
 		result= query.getResultList();
 		return result;
