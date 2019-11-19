@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import glap.model.Commentaire;
-import glap.model.Idee;
 
 @Repository
 @Transactional
@@ -43,7 +42,7 @@ public class CommentaireRepository {
 		return result;
 	}
 
-	//trouver tous les commentaires d'un membre liés à un autre commentaire
+	//trouver tous les commentaires liés à un autre commentaire
 	public List<Commentaire> findByCommentaireId(Integer id) {
 		List<Commentaire> result = new ArrayList<>();
 		TypedQuery<Commentaire> query = this.em.createQuery("SELECT * FROM Commentaire c where c.commentaire_id=id",Commentaire.class);
@@ -52,11 +51,11 @@ public class CommentaireRepository {
 		return result;
 	}
 
-	//Trouver les comentaires d'un membre liés à une idée
-	public List<Commentaire> findByMembreIdAndIdeeId(Idee i) {
+	//Trouver les comentaires liés à une idée
+	public List<Commentaire> findByIdeeId(Integer id) {
 		List<Commentaire> result = new ArrayList<>();
 		TypedQuery<Commentaire> query = this.em.createQuery("SELECT * FROM Commentaire c where c.idee_id=id",Commentaire.class);
-		query.setParameter("id", i.getId());
+		query.setParameter("id", id);
 		result= query.getResultList();
 		return result;
 	}
