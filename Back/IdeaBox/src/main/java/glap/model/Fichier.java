@@ -28,6 +28,10 @@ public class Fichier implements Serializable {
 	@Column(name="created_at", nullable=false)
 	private Date createdAt;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="deleted_at")
+	private Date deletedAt;
+
 	@Column(nullable=false, length=800)
 	private String nom;
 
@@ -81,6 +85,14 @@ public class Fichier implements Serializable {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public Date getDeletedAt() {
+		return this.deletedAt;
+	}
+
+	public void setDeletedAt(Date deletedAt) {
+		this.deletedAt = deletedAt;
 	}
 
 	public String getNom() {

@@ -1,25 +1,13 @@
 package glap.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 /**
  * The persistent class for the vote database table.
- *
+ * 
  */
 @Entity
 @Table(name="vote")
@@ -36,8 +24,7 @@ public class Vote implements Serializable {
 	@Column(name="created_at", nullable=false)
 	private Date createdAt;
 
-
-	private Boolean positif;
+	private byte positif;
 
 	//bi-directional many-to-one association to Commentaire
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -73,11 +60,11 @@ public class Vote implements Serializable {
 		this.createdAt = createdAt;
 	}
 
-	public boolean getPositif() {
+	public byte getPositif() {
 		return this.positif;
 	}
 
-	public void setPositif(boolean positif) {
+	public void setPositif(byte positif) {
 		this.positif = positif;
 	}
 

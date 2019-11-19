@@ -1,27 +1,14 @@
 package glap.model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 /**
  * The persistent class for the commentaire database table.
- *
+ * 
  */
 @Entity
 @Table(name="commentaire")
@@ -34,7 +21,7 @@ public class Commentaire implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int id;
 
-	@Column(name="contenu", nullable=false)
+	@Column(nullable=false, length=500)
 	private String contenu;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -83,6 +70,14 @@ public class Commentaire implements Serializable {
 		this.id = id;
 	}
 
+	public String getContenu() {
+		return this.contenu;
+	}
+
+	public void setContenu(String contenu) {
+		this.contenu = contenu;
+	}
+
 	public Date getCreatedAt() {
 		return this.createdAt;
 	}
@@ -116,14 +111,14 @@ public class Commentaire implements Serializable {
 	}
 
 	public Commentaire addCommentaire(Commentaire commentaire) {
-		this.getCommentaires().add(commentaire);
+		getCommentaires().add(commentaire);
 		commentaire.setCommentaire(this);
 
 		return commentaire;
 	}
 
 	public Commentaire removeCommentaire(Commentaire commentaire) {
-		this.getCommentaires().remove(commentaire);
+		getCommentaires().remove(commentaire);
 		commentaire.setCommentaire(null);
 
 		return commentaire;
@@ -154,14 +149,14 @@ public class Commentaire implements Serializable {
 	}
 
 	public Fichier addFichier(Fichier fichier) {
-		this.getFichiers().add(fichier);
+		getFichiers().add(fichier);
 		fichier.setCommentaireBean(this);
 
 		return fichier;
 	}
 
 	public Fichier removeFichier(Fichier fichier) {
-		this.getFichiers().remove(fichier);
+		getFichiers().remove(fichier);
 		fichier.setCommentaireBean(null);
 
 		return fichier;
@@ -176,25 +171,17 @@ public class Commentaire implements Serializable {
 	}
 
 	public Vote addVote(Vote vote) {
-		this.getVotes().add(vote);
+		getVotes().add(vote);
 		vote.setCommentaire(this);
 
 		return vote;
 	}
 
 	public Vote removeVote(Vote vote) {
-		this.getVotes().remove(vote);
+		getVotes().remove(vote);
 		vote.setCommentaire(null);
 
 		return vote;
-	}
-
-	public String getContenu() {
-		return this.contenu;
-	}
-
-	public void setContenu(String contenu) {
-		this.contenu = contenu;
 	}
 
 }
