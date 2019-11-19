@@ -1,12 +1,20 @@
 package glap.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
  * The persistent class for the role database table.
- * 
+ *
  */
 @Entity
 @Table(name="role")
@@ -18,7 +26,7 @@ public class Role implements Serializable {
 	private RolePK id;
 
 	@Column(name="porteur_projet", nullable=false)
-	private byte porteurProjet;
+	private boolean porteurProjet;
 
 	//bi-directional many-to-one association to Idee
 	@ManyToOne(fetch=FetchType.LAZY)
