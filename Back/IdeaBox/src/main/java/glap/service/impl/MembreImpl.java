@@ -30,6 +30,10 @@ public class MembreImpl implements IMembreService {
 	@Override
 	public List<MembreDTO> recupererAll() {
 		Iterator<Membre> iterator = membreRepository.findAll().iterator();
+
+
+
+
 		List<Membre> listM = new ArrayList<>();
 		List<MembreDTO> listDTO = new ArrayList<>();
 		// Add each element of iterator to the List
