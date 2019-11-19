@@ -3,6 +3,7 @@ package glap.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,11 @@ import glap.service.impl.CommentaireService;
 public class CommentaireController {
 	private CommentaireService commentaireService;
 
+	@Autowired
+	public CommentaireController( CommentaireService cService) {
+		this.commentaireService = cService;
+	}
+
 	@GetMapping
 	public List<Commentaire> findAll() {
 		List<Commentaire> result = new ArrayList<>();
@@ -31,8 +37,8 @@ public class CommentaireController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public CommentaireDTO save(@RequestBody CommentaireDTO m) {
-		CommentaireDTO result= this.commentaireService.add(m);
+	public CommentaireDTO save(@RequestBody CommentaireDTO c) {
+		CommentaireDTO result= this.commentaireService.add(c);
 		return result;
 	}
 

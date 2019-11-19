@@ -20,7 +20,7 @@ public class VoteRepository {
 
 	public Vote update(Vote vote) {
 		Vote result = this.em.find(Vote.class,vote.getId());
-		if (result.getPositif()==true) {
+		if (result.isPositif()==true) {
 			result.setPositif(false);
 		}else {
 			result.setPositif(true);

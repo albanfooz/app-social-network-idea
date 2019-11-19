@@ -1,14 +1,29 @@
 package glap.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
  * The persistent class for the idee database table.
- * 
+ *
  */
 @Entity
 @Table(name="idee")
@@ -38,7 +53,7 @@ public class Idee implements Serializable {
 
 	//bi-directional many-to-many association to Membre
 	@ManyToMany(mappedBy="idees1")
-	private Set<Membre> membres;
+	private Set<Membre> collaborateurs;
 
 	//bi-directional many-to-one association to Commentaire
 	@OneToMany(mappedBy="idee")
@@ -109,12 +124,12 @@ public class Idee implements Serializable {
 		this.titre = titre;
 	}
 
-	public Set<Membre> getMembres() {
-		return this.membres;
+	public Set<Membre> getCollaborteurs() {
+		return this.collaborateurs;
 	}
 
-	public void setMembres(Set<Membre> membres) {
-		this.membres = membres;
+	public void setCollaborateurs(Set<Membre> membres) {
+		this.collaborateurs = membres;
 	}
 
 	public Set<Commentaire> getCommentaires() {
@@ -126,14 +141,14 @@ public class Idee implements Serializable {
 	}
 
 	public Commentaire addCommentaire(Commentaire commentaire) {
-		getCommentaires().add(commentaire);
+		this.getCommentaires().add(commentaire);
 		commentaire.setIdee(this);
 
 		return commentaire;
 	}
 
 	public Commentaire removeCommentaire(Commentaire commentaire) {
-		getCommentaires().remove(commentaire);
+		this.getCommentaires().remove(commentaire);
 		commentaire.setIdee(null);
 
 		return commentaire;
@@ -148,14 +163,14 @@ public class Idee implements Serializable {
 	}
 
 	public Fichier addFichier(Fichier fichier) {
-		getFichiers().add(fichier);
+		this.getFichiers().add(fichier);
 		fichier.setIdee(this);
 
 		return fichier;
 	}
 
 	public Fichier removeFichier(Fichier fichier) {
-		getFichiers().remove(fichier);
+		this.getFichiers().remove(fichier);
 		fichier.setIdee(null);
 
 		return fichier;
@@ -194,14 +209,14 @@ public class Idee implements Serializable {
 	}
 
 	public Vote addVote(Vote vote) {
-		getVotes().add(vote);
+		this.getVotes().add(vote);
 		vote.setIdee(this);
 
 		return vote;
 	}
 
 	public Vote removeVote(Vote vote) {
-		getVotes().remove(vote);
+		this.getVotes().remove(vote);
 		vote.setIdee(null);
 
 		return vote;
