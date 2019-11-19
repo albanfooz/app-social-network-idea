@@ -51,6 +51,10 @@ public class Idee implements Serializable {
 	@Column(nullable=false, length=500)
 	private String titre;
 
+	//bi-directional many-to-many association to Membre
+	@ManyToMany(mappedBy="idees1")
+	private Set<Membre> collaborateurs;
+
 	//bi-directional many-to-one association to Commentaire
 	@OneToMany(mappedBy="idee")
 	private Set<Commentaire> commentaires;
@@ -59,14 +63,15 @@ public class Idee implements Serializable {
 	@OneToMany(mappedBy="idee")
 	private Set<Fichier> fichiers;
 
+	//bi-directional many-to-one association to Membre
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="membre_id", nullable=false)
+	private Membre membre;
+
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="type_id", nullable=false)
 	private Categorie categorie;
-
-	//bi-directional many-to-one association to Role
-	@OneToMany(mappedBy="idee")
-	private Set<Role> roles;
 
 	//bi-directional many-to-many association to Tag
 	@ManyToMany(mappedBy="idees")
@@ -119,6 +124,14 @@ public class Idee implements Serializable {
 		this.titre = titre;
 	}
 
+	public Set<Membre> getCollaborteurs() {
+		return this.collaborateurs;
+	}
+
+	public void setCollaborateurs(Set<Membre> membres) {
+		this.collaborateurs = membres;
+	}
+
 	public Set<Commentaire> getCommentaires() {
 		return this.commentaires;
 	}
@@ -163,34 +176,20 @@ public class Idee implements Serializable {
 		return fichier;
 	}
 
+	public Membre getMembre() {
+		return this.membre;
+	}
+
+	public void setMembre(Membre membre) {
+		this.membre = membre;
+	}
+
 	public Categorie getCategorie() {
 		return this.categorie;
 	}
 
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
-	}
-
-	public Set<Role> getRoles() {
-		return this.roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
-	public Role addRole(Role role) {
-		this.getRoles().add(role);
-		role.setIdee(this);
-
-		return role;
-	}
-
-	public Role removeRole(Role role) {
-		this.getRoles().remove(role);
-		role.setIdee(null);
-
-		return role;
 	}
 
 	public Set<Tag> getTags() {

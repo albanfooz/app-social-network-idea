@@ -36,8 +36,7 @@ public class Vote implements Serializable {
 	@Column(name="created_at", nullable=false)
 	private Date createdAt;
 
-
-	private Boolean positif;
+	private boolean positif;
 
 	//bi-directional many-to-one association to Commentaire
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -73,7 +72,7 @@ public class Vote implements Serializable {
 		this.createdAt = createdAt;
 	}
 
-	public boolean getPositif() {
+	public boolean isPositif() {
 		return this.positif;
 	}
 
