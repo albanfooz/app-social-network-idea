@@ -15,23 +15,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import glap.DTO.CommentaireDTO;
 import glap.model.Commentaire;
-import glap.service.CommentaireService;
+import glap.service.impl.CommentaireService;
 
 @RestController
 @RequestMapping("/commentaires")
 public class CommentaireController {
-	private CommentaireService userService;
+	private CommentaireService commentaireService;
 
 	@GetMapping
 	public List<Commentaire> findAll() {
 		List<Commentaire> result = new ArrayList<>();
+
 		return result;
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public CommentaireDTO save(@RequestBody CommentaireDTO m) {
-		return m;
+		CommentaireDTO result= this.commentaireService.add(m);
+		return result;
 	}
 
 	/**

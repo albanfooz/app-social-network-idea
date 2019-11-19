@@ -2,18 +2,22 @@ package glap.DTO;
 
 import javax.validation.constraints.NotNull;
 
+import glap.model.Commentaire;
+import glap.model.Idee;
+import glap.model.Membre;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class VoteDTO {
 	private Integer id;
 	private Boolean positif;
-	private Integer idCommentaire;
-	private Integer idIdee;
+	//commentaire parent
+	private Commentaire commentaire;
+	//idee parent
+	private Idee idee;
+	//membre parent
 	@NotNull
-	private Integer idMembre;
+	private Membre membre;
 }
