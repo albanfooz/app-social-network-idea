@@ -21,27 +21,28 @@ public class Profil implements Serializable {
 	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="ceated_at", nullable=false)
-	private Date ceatedAt;
+	@Column(name="created_at", nullable=false)
+	private Date createdAt;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="deleted_at")
+	private Date deletedAt;
+
+	@Column(name="`e-mail`", length=100)
+	private String e_mail;
 
 	@Column(nullable=false, length=200)
 	private String login;
 
-	@Column(length=200)
-	private String nom;
-
 	@Column(nullable=false, length=200)
 	private String password;
-
-	@Column(length=200)
-	private String prenom;
 
 	@Column(nullable=false)
 	private int score;
 
 	//bi-directional many-to-one association to Fichier
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="fichier_id", nullable=false)
+	@JoinColumn(name="fichier_id")
 	private Fichier fichier;
 
 	//bi-directional many-to-one association to Membre
@@ -60,12 +61,28 @@ public class Profil implements Serializable {
 		this.id = id;
 	}
 
-	public Date getCeatedAt() {
-		return this.ceatedAt;
+	public Date getCreatedAt() {
+		return this.createdAt;
 	}
 
-	public void setCeatedAt(Date ceatedAt) {
-		this.ceatedAt = ceatedAt;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getDeletedAt() {
+		return this.deletedAt;
+	}
+
+	public void setDeletedAt(Date deletedAt) {
+		this.deletedAt = deletedAt;
+	}
+
+	public String getE_mail() {
+		return this.e_mail;
+	}
+
+	public void setE_mail(String e_mail) {
+		this.e_mail = e_mail;
 	}
 
 	public String getLogin() {
@@ -76,28 +93,12 @@ public class Profil implements Serializable {
 		this.login = login;
 	}
 
-	public String getNom() {
-		return this.nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
 	public String getPassword() {
 		return this.password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getPrenom() {
-		return this.prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
 	}
 
 	public int getScore() {

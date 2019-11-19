@@ -20,6 +20,19 @@ public class Membre implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int id;
 
+	//bi-directional many-to-many association to Idee
+	@ManyToMany
+	@JoinTable(
+		name="collaborateur"
+		, joinColumns={
+			@JoinColumn(name="membre_id", nullable=false)
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="idee_id", nullable=false)
+			}
+		)
+	private Set<Idee> idees1;
+
 	//bi-directional many-to-one association to Commentaire
 	@OneToMany(mappedBy="membre")
 	private Set<Commentaire> commentaires;
@@ -28,13 +41,13 @@ public class Membre implements Serializable {
 	@OneToMany(mappedBy="membre")
 	private Set<Fichier> fichiers;
 
+	//bi-directional many-to-one association to Idee
+	@OneToMany(mappedBy="membre")
+	private Set<Idee> idees2;
+
 	//bi-directional many-to-one association to Profil
 	@OneToMany(mappedBy="membre")
 	private Set<Profil> profils;
-
-	//bi-directional many-to-one association to Role
-	@OneToMany(mappedBy="membre")
-	private Set<Role> roles;
 
 	//bi-directional many-to-one association to Vote
 	@OneToMany(mappedBy="membre")
@@ -49,6 +62,14 @@ public class Membre implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Set<Idee> getIdees1() {
+		return this.idees1;
+	}
+
+	public void setIdees1(Set<Idee> idees1) {
+		this.idees1 = idees1;
 	}
 
 	public Set<Commentaire> getCommentaires() {
@@ -95,6 +116,28 @@ public class Membre implements Serializable {
 		return fichier;
 	}
 
+	public Set<Idee> getIdees2() {
+		return this.idees2;
+	}
+
+	public void setIdees2(Set<Idee> idees2) {
+		this.idees2 = idees2;
+	}
+
+	public Idee addIdees2(Idee idees2) {
+		getIdees2().add(idees2);
+		idees2.setMembre(this);
+
+		return idees2;
+	}
+
+	public Idee removeIdees2(Idee idees2) {
+		getIdees2().remove(idees2);
+		idees2.setMembre(null);
+
+		return idees2;
+	}
+
 	public Set<Profil> getProfils() {
 		return this.profils;
 	}
@@ -115,28 +158,6 @@ public class Membre implements Serializable {
 		profil.setMembre(null);
 
 		return profil;
-	}
-
-	public Set<Role> getRoles() {
-		return this.roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
-	public Role addRole(Role role) {
-		getRoles().add(role);
-		role.setMembre(this);
-
-		return role;
-	}
-
-	public Role removeRole(Role role) {
-		getRoles().remove(role);
-		role.setMembre(null);
-
-		return role;
 	}
 
 	public Set<Vote> getVotes() {
