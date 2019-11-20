@@ -33,9 +33,11 @@ public class VoteService implements IVoteService {
 	}
 
 	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
-
+	public VoteDTO update(VoteDTO vote) {
+		Vote voteModel = this.voteRepository.findById(vote.getId());
+		voteModel.setPositif(vote.getPositif());
+		this.voteRepository.update(vote.getId(),voteModel);
+		return vote;
 	}
 
 	@Override

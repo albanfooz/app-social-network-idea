@@ -37,8 +37,10 @@ public class IdeeRepository {
 
 	//modifier une idée
 	public int update(Integer id, Idee i) {
-		Query query = this.em.createQuery("Update Idee i Set i.description=:description, i.titre=:titre, i. WHERE i.id=:id");
+		Query query = this.em.createQuery("Update Idee i Set i.description=:description, i.titre=:titre WHERE i.id=:id");
 		query.setParameter("description", i.getDescription());
+		query.setParameter("titre", i.getTitre());
+		query.setParameter("id", id);
 		int result = query.executeUpdate();
 		return result;
 	}
