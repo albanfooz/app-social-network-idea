@@ -41,6 +41,7 @@ public class VoteRepository {
 		Integer score=upVote-downVote;
 		return score;
 	}
+
 	public int findIdeeScore(Integer id) {
 		Query query = this.em.createQuery("SELECT COUNT(*) FROM Vote v where v.positif=true and v.idee_id=:id",Vote.class);
 		query.setParameter("id", id);
