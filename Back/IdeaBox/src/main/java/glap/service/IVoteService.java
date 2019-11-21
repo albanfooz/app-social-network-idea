@@ -9,8 +9,8 @@ public interface IVoteService{
 	//ajouter un vote
 	public VoteDTO add(VoteDTO vote);
 
-	//supprimer un vote
-	public void delete();
+	//changer son vote, pour l'inverser ou l'annuler
+	public VoteDTO update(VoteDTO vote);
 
 	public List<Vote> findDownVote();
 
