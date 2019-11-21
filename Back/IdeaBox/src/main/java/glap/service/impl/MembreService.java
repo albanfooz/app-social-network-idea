@@ -13,7 +13,7 @@ import glap.repository.IMembreRepository;
 import glap.service.IMembreService;
 
 @Service
-public class MembreImpl implements IMembreService {
+public class MembreService implements IMembreService {
 	@Autowired
 	private IMembreRepository membreRepository;
 

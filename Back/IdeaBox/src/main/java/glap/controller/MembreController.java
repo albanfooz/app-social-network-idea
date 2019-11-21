@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import glap.DTO.membre.MembreDTO;
-import glap.service.impl.MembreImpl;
+import glap.service.impl.MembreService;
 
 @RestController
 @RequestMapping("/membres")
 public class MembreController {
 
 	@Autowired
-	private MembreImpl mService;
+	private MembreService mService;
 
 	@GetMapping
 	public List<MembreDTO> findAll() {
