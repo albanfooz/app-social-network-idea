@@ -5,12 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import glap.DTO.membre.MembreDTO;
 import glap.model.Membre;
 import glap.repository.IMembreRepository;
 import glap.service.IMembreService;
 
+@Service
 public class MembreImpl implements IMembreService {
 	@Autowired
 	private IMembreRepository membreRepository;
@@ -41,7 +43,6 @@ public class MembreImpl implements IMembreService {
 		for (Membre membre : listM) {
 			MembreDTO mToPush = new MembreDTO();
 			mToPush.setId(membre.getId());
-			//mToPush.setPseudonyme(membre.get);
 			listDTO.add(mToPush);
 		}
 
