@@ -31,25 +31,41 @@ public class VoteRepository {
 		Vote result = this.em.find(Vote.class,id);
 		return result;
 	}
-	public int findCommentaireScore(Integer id) {
-		Query query = this.em.createQuery("SELECT COUNT(*) FROM Vote v where v.positif=true and v.commentaire_id=:id",Vote.class);
+	public Vote findByCommentaireIdAndMembreId(Integer comId,Integer membreId) {
+		Query query = this.em.createQuery("SELECT v FROM Vote v where v.commentaire.id=:id and v.membre.id=:idM",Vote.class);
+		query.setParameter("id", comId);
+		query.setParameter("idM", membreId);
+		Vote result= (Vote) query.getSingleResult();
+		return result;
+	}
+	public Vote findByIdeeIdAndMembreId(Integer ididee, Integer idmembre) {
+		Query query = this.em.createQuery("SELECT v FROM Vote v where v.idee.id=:id and v.membre.id=:idM",Vote.class);
+		query.setParameter("id", ididee);
+		query.setParameter("idM", idmembre);
+		Vote result= (Vote) query.getSingleResult();
+		return result;
+	}
+
+	public long findCommentaireScore(int id) {
+		Query query = this.em.createQuery("SELECT COUNT(*) FROM Vote v where v.positif=true and v.commentaire.id=:id",Long.class);
 		query.setParameter("id", id);
-		Integer upVote=(int) query.getSingleResult();
-		Query query1 = this.em.createQuery("SELECT COUNT(*) FROM Vote v where v.positif=false and v.commentaire_id=:id",Vote.class);
+		long upVote=  (long) query.getSingleResult();
+		Query query1 = this.em.createQuery("SELECT COUNT(*) FROM Vote v where v.positif=false and v.commentaire.id=:id",Long.class);
 		query1.setParameter("id", id);
-		Integer downVote=(int) query1.getSingleResult();
-		Integer score=upVote-downVote;
+		long downVote= (long) query1.getSingleResult();
+		long score=upVote-downVote;
 		return score;
 	}
 
-	public int findIdeeScore(Integer id) {
-		Query query = this.em.createQuery("SELECT COUNT(*) FROM Vote v where v.positif=true and v.idee_id=:id",Vote.class);
+	public long findIdeeScore(Integer id) {
+		Query query = this.em.createQuery("SELECT COUNT(*) FROM Vote v where v.positif=true and v.idee.id=:id",Long.class);
 		query.setParameter("id", id);
-		Integer upVote=(int) query.getSingleResult();
-		Query query1 = this.em.createQuery("SELECT COUNT(*) FROM Vote v where v.positif=false and v.idee_id=:id",Vote.class);
+		long upVote=  (long) query.getSingleResult();
+		Query query1 = this.em.createQuery("SELECT COUNT(*) FROM Vote v where v.positif=false and v.idee.id=:id",Long.class);
 		query1.setParameter("id", id);
-		Integer downVote=(int) query1.getSingleResult();
-		Integer score=upVote-downVote;
+		long downVote= (long) query1.getSingleResult();
+		long score=upVote-downVote;
 		return score;
 	}
+
 }

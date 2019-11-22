@@ -30,13 +30,13 @@ public class Vote implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
-	private int id;
+	private Integer id;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="created_at", nullable=false)
 	private Date createdAt;
 
-	private boolean positif;
+	private Boolean positif;
 
 	//bi-directional many-to-one association to Commentaire
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -56,7 +56,7 @@ public class Vote implements Serializable {
 	public Vote() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -72,7 +72,7 @@ public class Vote implements Serializable {
 		this.createdAt = createdAt;
 	}
 
-	public boolean isPositif() {
+	public Boolean isPositif() {
 		return this.positif;
 	}
 

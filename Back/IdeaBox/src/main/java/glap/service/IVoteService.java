@@ -1,9 +1,6 @@
 package glap.service;
 
-import java.util.List;
-
 import glap.DTO.VoteDTO;
-import glap.model.Vote;
 
 public interface IVoteService{
 	//ajouter un vote
@@ -12,7 +9,12 @@ public interface IVoteService{
 	//changer son vote, pour l'inverser ou l'annuler
 	public VoteDTO update(VoteDTO vote);
 
-	public List<Vote> findDownVote();
+	//afficher les votes d'un membre sur une idée
+	public VoteDTO findVoteByMemberIdAndCommentaireId(int idcom,int idmembre);
 
-	public List<Vote> findUpVote();
+	public VoteDTO findByMemberIdAndIdeeId(int ididee,int idmembre);
+
+	public long findScoreByCommentaireId(int id);
+
+	public long findScoreByIdeeId(int id);
 }
