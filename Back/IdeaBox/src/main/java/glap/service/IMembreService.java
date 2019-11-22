@@ -22,12 +22,12 @@ public interface IMembreService {
 	 */
 	public MembreDTO update(Integer id, MembreDTO membreDTO);
 	/**
-	 * Ajouter le Membre
+	 * Ajouter un Membre
 	 *
-	 * @param membreDTO à ajouter
+	 * membre n'est composé que d'un ID en Auto increment alors pas de parametres
 	 * @return membreDTO si OK, null sinon
 	 */
-	public MembreDTO add(MembreDTO membreDTO) ;
+	public MembreDTO add() ;
 	/**
 	 * Afficher les Membres
 	 *

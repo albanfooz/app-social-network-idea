@@ -18,6 +18,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MembreDTO {
 	private Integer id;
-	private String pseudonyme;
 
 }
