@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import glap.DTO.membre.MembreDTO;
 import glap.model.Membre;
@@ -24,9 +25,12 @@ public class MembreService implements IMembreService {
 	}
 
 	@Override
-	public MembreDTO add(MembreDTO membreDTO) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public MembreDTO add() {
+		MembreDTO result = new MembreDTO();
+		Membre m = membreRepository.save(new Membre());
+		result.setId(m.getId());
+		return result;
 	}
 
 	@Override

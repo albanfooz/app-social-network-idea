@@ -12,6 +12,7 @@ public class ProfilDTO {
 	Integer id;
 	String login; //Pseudo
 	String mdp;
+	Integer membreId;
 	Integer score;
 	LocalDateTime createdAt;
 	LocalDateTime deletedAt;
