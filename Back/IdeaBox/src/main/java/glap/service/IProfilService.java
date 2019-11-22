@@ -35,4 +35,21 @@ public interface IProfilService {
 	 */
 	public List<ProfilDTO> recupererAll();
 
+	/**
+	 * Récupérer le Profil
+	 *
+	 * @param idProfil
+	 * @return profilDTO si OK, null sinon
+	 */
+	public ProfilDTO getById(Integer idProfil) ;
+	/**
+	 * Récupérer le Profil avec MembreID
+	 *
+	 * @param idProfil
+	 * @return profilDTO si OK, null sinon
+	 */
+	public ProfilDTO getByMembreId(Integer idMembre) ;
+
+
+
 }
