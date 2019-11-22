@@ -44,7 +44,9 @@ public class VoteService implements IVoteService {
 	public VoteDTO findVoteByMemberIdAndCommentaireId(int idcom,int idmembre) {
 		Vote vote = this.voteRepository.findByCommentaireIdAndMembreId(idcom,idmembre);
 		VoteDTO result=null;
-		result=new VoteDTO(vote.getId(),vote.isPositif(),vote.getCommentaire(),vote.getIdee(),vote.getMembre());
+		if(vote!=null) {
+			result=new VoteDTO(vote.getId(),vote.isPositif(),vote.getCommentaire(),vote.getIdee(),vote.getMembre());
+		}
 		return result;
 	}
 

@@ -1,6 +1,7 @@
 package glap.repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -32,10 +33,15 @@ public class VoteRepository {
 		return result;
 	}
 	public Vote findByCommentaireIdAndMembreId(Integer comId,Integer membreId) {
-		Query query = this.em.createQuery("SELECT v FROM Vote v where v.commentaire.id=:id and v.membre.id=:idM",Vote.class);
-		query.setParameter("id", comId);
-		query.setParameter("idM", membreId);
-		Vote result= (Vote) query.getSingleResult();
+		Vote result=null;
+		try {
+			Query query = this.em.createQuery("SELECT v FROM Vote v where v.commentaire.id=:id and v.membre.id=:idM",Vote.class);
+			query.setParameter("id", comId);
+			query.setParameter("idM", membreId);
+			result= (Vote) query.getSingleResult();
+		}catch(NoResultException e){
+			System.out.println("pas de vote");
+		}
 		return result;
 	}
 	public Vote findByIdeeIdAndMembreId(Integer ididee, Integer idmembre) {

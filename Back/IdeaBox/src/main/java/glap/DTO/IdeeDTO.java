@@ -25,8 +25,9 @@ public class IdeeDTO {
 	private Set<Fichier> fichiers;
 	private Membre membre;
 	private Categorie categorie;
-	private Set<Tag> tags;
 	private Set<Vote> votes;
+	private Set<Tag> tags;
+
 
 	//constructeur pour le test
 	public IdeeDTO(Date createdAt,String description,String titre,Membre membre,Categorie categorie){
