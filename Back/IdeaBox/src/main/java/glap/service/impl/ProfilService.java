@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,10 @@ public class ProfilService implements IProfilService {
 	@Transactional
 	public ProfilDTO add(ProfilDTO profilDTO) {
 		ProfilDTO result = new ProfilDTO();
+		if(profilDTO.getMembreId() == null) {
+			Membre tempMembre = membreRepository.save(new Membre());
+			profilDTO.setMembreId(tempMembre.getId());
+		}
 		Profil temp = this.profilDTOtoModel(profilDTO);
 		result = this.profilModelToDTO(this.profilRepository.save(temp));
 		return result;
@@ -86,13 +91,29 @@ public class ProfilService implements IProfilService {
 		//membre to Membre id
 		Optional<Membre> opt = membreRepository.findById(profilDTO.getMembreId());
 		opt.ifPresent(membre -> { result.setMembre(membre);});
-		result.setMembre(opt.orElse(membreRepository.save(new Membre())));
 
 		result.setCreatedAt(Date.valueOf(profilDTO.getCreatedAt().toLocalDate()));
 		if (profilDTO.getDeletedAt() != null) {
 			result.setDeletedAt(Date.valueOf(profilDTO.getDeletedAt().toLocalDate()));
 		}
 		return result;
+	}
+
+	@Override
+	public ProfilDTO getById(Integer idProfil) {
+		ProfilDTO result = null;
+		// Atomic to set value in lambda
+		AtomicReference<ProfilDTO> value = new AtomicReference<>();
+		Optional<Profil> opt = this.profilRepository.findById(idProfil);
+		opt.ifPresent(profil ->{value.set(this.profilModelToDTO(profil));});
+		result = value.get();
+		return result;
+	}
+
+	@Override
+	public ProfilDTO getByMembreId(Integer idMembre) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

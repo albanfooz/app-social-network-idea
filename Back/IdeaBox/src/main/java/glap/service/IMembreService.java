@@ -34,5 +34,6 @@ public interface IMembreService {
 	 * @return List<membreDTO> si OK, null sinon
 	 */
 	public List<MembreDTO> recupererAll();
+	public MembreDTO getById(Integer idMembre);
 
 }
