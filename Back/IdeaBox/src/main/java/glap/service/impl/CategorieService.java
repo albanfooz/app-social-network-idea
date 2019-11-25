@@ -19,56 +19,64 @@ public class CategorieService implements ICategorieService {
 	@Autowired
 	private ICategorieRepository categorieRepository;
 
-	@Override
-	@Transactional
-	public CategorieDTO add(CategorieDTO catDTO) {
-		CategorieDTO result = new CategorieDTO();
-		Categorie temp = this.categorieDTOtoModel(catDTO);
-		result = this.categorieModelToDTO(this.categorieRepository.save(temp));
-		return result;
-	}
 
 	@Override
-	public List<CategorieDTO> recupererAll() {
-		Iterator<Categorie> iterator = this.categorieRepository.findAll().iterator();
-		//toList
-		List<Categorie> listC = new ArrayList<>();
-		List<CategorieDTO> listDTO = new ArrayList<>();
-		//ajouter chaque element de iterator dans la list
-		iterator.forEachRemaining(listC::add);
-		for (Categorie categorie : listC) {
-			//mapping Moddel dans DTO
-			CategorieDTO CategorieToPush = this.categorieModelToDTO(categorie);
-			listDTO.add(CategorieToPush);
-		}
-		return listDTO;
-	}
-
-	@Override
-	public CategorieDTO delete(CategorieDTO cat) {
+	public CategorieDTO update(Integer id, CategorieDTO catDTO) {
 
 		return null;
 	}
 
-
-	private CategorieDTO categorieModelToDTO(Categorie cat) {
+	@Override
+	@Transactional
+	public CategorieDTO add(CategorieDTO catDTO) {
 		CategorieDTO result = new CategorieDTO();
-		result.setId(cat.getId());
+		Categorie cat = this.categorieDTOtoModel(catDTO);
+		result = this.CategorieModelToDTO(this.categorieRepository.save(cat));
+
+		return result;
+	}
+
+	@Override
+	public CategorieDTO delete(CategorieDTO catDTO) {
+		return null;
+	}
+
+	@Override
+	public List<CategorieDTO> recupereAll() {
+		Iterator<Categorie> iterator = this.categorieRepository.findAll().iterator();
+		List<Categorie> listCat = new ArrayList<>();
+		List<CategorieDTO> listCatDTO = new ArrayList<>();
+		iterator.forEachRemaining(listCat::add);
+		for (Categorie categorie : listCat) {
+			CategorieDTO CatToPush = this.CategorieModelToDTO(categorie);
+
+			listCatDTO.add(CatToPush);
+		}
+		return listCatDTO;
+	}
+
+	private CategorieDTO CategorieModelToDTO (Categorie cat) {
+		CategorieDTO result = new CategorieDTO();
+		if (cat.getId() == null) {
+			result.setId(null);
+		}
+		else {
+			result.setId(cat.getId());
+		}
 		result.setTitre(cat.getTitre());
 		result.setDescription(cat.getDescription());
 		return result;
 	}
 
-
-
-	private Categorie categorieDTOtoModel(CategorieDTO catDTO) {
+	private  Categorie categorieDTOtoModel (CategorieDTO catDTO) {
 		Categorie result = new Categorie();
-		if (catDTO.getId() != null) {
+		if (catDTO.getId() == null) {
+			result.setId(null);
+		} else {
 			result.setId(catDTO.getId());
 		}
 		result.setTitre(catDTO.getTitre());
 		result.setDescription(catDTO.getDescription());
 		return result;
 	}
-
 }

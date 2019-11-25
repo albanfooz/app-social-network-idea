@@ -13,19 +13,19 @@ import glap.DTO.categorie.CategorieDTO;
 import glap.service.impl.CategorieService;
 
 @RestController
-@RequestMapping("/categorie")
+@RequestMapping("/categories")
 public class CategorieController {
 	@Autowired
-	private CategorieService CategorieService;
+	private CategorieService catService;
 
 	@GetMapping
 	public List<CategorieDTO> findAll() {
-		return this.CategorieService.recupererAll();
+		return this.catService.recupereAll();
 	}
 
 	@PostMapping
 	public CategorieDTO save(@RequestBody CategorieDTO CatDto) {
 		CategorieDTO result = new CategorieDTO();
-		return this.CategorieService.add(CatDto);
+		return this.catService.add(CatDto);
 	}
 }

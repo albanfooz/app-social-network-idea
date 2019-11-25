@@ -1,13 +1,21 @@
 package glap.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
  * The persistent class for the categorie database table.
- * 
+ *
  */
 @Entity
 @Table(name="categorie")
@@ -18,7 +26,7 @@ public class Categorie implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
-	private int id;
+	private Integer id;
 
 	@Column(length=45)
 	private String categoriecol;
@@ -36,11 +44,11 @@ public class Categorie implements Serializable {
 	public Categorie() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -77,14 +85,14 @@ public class Categorie implements Serializable {
 	}
 
 	public Idee addIdee(Idee idee) {
-		getIdees().add(idee);
+		this.getIdees().add(idee);
 		idee.setCategorie(this);
 
 		return idee;
 	}
 
 	public Idee removeIdee(Idee idee) {
-		getIdees().remove(idee);
+		this.getIdees().remove(idee);
 		idee.setCategorie(null);
 
 		return idee;
