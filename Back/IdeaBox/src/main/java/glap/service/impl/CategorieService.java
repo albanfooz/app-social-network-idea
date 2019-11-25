@@ -3,6 +3,8 @@ package glap.service.impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import glap.DTO.categorie.CategorieDTO;
 import glap.model.Categorie;
+import glap.model.Idee;
 import glap.repository.ICategorieRepository;
 import glap.service.ICategorieService;
 
@@ -22,12 +25,12 @@ public class CategorieService implements ICategorieService {
 
 	@Override
 	public CategorieDTO update(Integer id, CategorieDTO catDTO) {
-
 		return null;
 	}
 
 	@Override
 	@Transactional
+	// ajouter une categorie
 	public CategorieDTO add(CategorieDTO catDTO) {
 		CategorieDTO result = new CategorieDTO();
 		Categorie cat = this.categorieDTOtoModel(catDTO);
@@ -42,6 +45,7 @@ public class CategorieService implements ICategorieService {
 	}
 
 	@Override
+	// afficher toute les categorie sous forme de liste
 	public List<CategorieDTO> recupereAll() {
 		Iterator<Categorie> iterator = this.categorieRepository.findAll().iterator();
 		List<Categorie> listCat = new ArrayList<>();
@@ -55,6 +59,7 @@ public class CategorieService implements ICategorieService {
 		return listCatDTO;
 	}
 
+	//
 	private CategorieDTO CategorieModelToDTO (Categorie cat) {
 		CategorieDTO result = new CategorieDTO();
 		if (cat.getId() == null) {
@@ -68,6 +73,7 @@ public class CategorieService implements ICategorieService {
 		return result;
 	}
 
+	//
 	private  Categorie categorieDTOtoModel (CategorieDTO catDTO) {
 		Categorie result = new Categorie();
 		if (catDTO.getId() == null) {
@@ -79,4 +85,24 @@ public class CategorieService implements ICategorieService {
 		result.setDescription(catDTO.getDescription());
 		return result;
 	}
+
+
+	// afficher une categorie par son id
+	@Override
+	public CategorieDTO getById(Integer IdCategorie) {
+		CategorieDTO result= null;
+		AtomicReference<CategorieDTO> value = new AtomicReference<>();
+		Optional<Categorie> opt = this.categorieRepository.findById(IdCategorie);
+		opt.ifPresent(cat -> {value.set(this.CategorieModelToDTO(cat));});
+		result=value.get();
+		return result;
+	}
+
+	@Override
+	public List<Idee> getByIdeeId(Integer IdCategorie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }
