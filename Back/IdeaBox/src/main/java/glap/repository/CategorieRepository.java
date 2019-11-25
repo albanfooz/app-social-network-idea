@@ -2,6 +2,7 @@ package glap.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -58,11 +59,12 @@ public class CategorieRepository {
 	}
 
 	// trouver des idées liés à une categorie à placer dans le serviceRepository
-	public List<Idee> findByCategorieId(Integer id) {
-		List<Idee> result = new ArrayList<>();
-		TypedQuery<Idee> query = this.em.createQuery("SELECT i FROM Idee i WHERE i.categorie_id=:id",Idee.class);
+	public Set<Idee> findByCategorieId(Integer id) {
+		Set<Idee> result;
+		TypedQuery<Categorie> query = this.em.createQuery("SELECT c FROM Categorie c WHERE c.id=:id",Categorie.class);
 		query.setParameter("id", id);
-		result=query.getResultList();
+		Categorie temp = query.getSingleResult();
+		result = temp.getIdees();
 		return result;
 
 	}

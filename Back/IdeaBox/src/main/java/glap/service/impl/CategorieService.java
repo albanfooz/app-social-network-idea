@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import glap.DTO.IdeeDTO;
 import glap.DTO.categorie.CategorieDTO;
 import glap.model.Categorie;
-import glap.model.Idee;
 import glap.repository.ICategorieRepository;
 import glap.service.ICategorieService;
 
@@ -99,10 +99,14 @@ public class CategorieService implements ICategorieService {
 	}
 
 	@Override
-	public List<Idee> getByIdeeId(Integer IdCategorie) {
-		// TODO Auto-generated method stub
+	public <IdeeDTO> findIdeeByCat(Integer IdCategorie) {
+		ListCat findByCategorieId
+		List<IdeeDTO> listIdeeDTO = new ArrayList<>();
 		return null;
 	}
+
+
+
 
 
 }
