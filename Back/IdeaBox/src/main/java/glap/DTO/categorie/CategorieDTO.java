@@ -18,11 +18,10 @@ public class CategorieDTO {
 	private Set<Idee> idees;
 
 
-	public CategorieDTO (String categoriecol, String description, String titre, Set<Idee> idees) {
+	public CategorieDTO (String categoriecol, String description, String titre) {
 		this.categoriecol=categoriecol;
 		this.description=description;
 		this.titre=titre;
-		this.idees=idees;
 	}
 
 

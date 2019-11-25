@@ -7,14 +7,16 @@ import glap.DTO.categorie.CategorieDTO;
 public interface ICategorieService {
 
 	// ajouter une categorie
-	public CategorieDTO add (CategorieDTO cat);
-
-	//afficher les catégories
-	List <CategorieDTO> findForCategorie(CategorieDTO c);
+	public CategorieDTO add (CategorieDTO catDTO);
 
 	//supprimer une Categorie
-	public CategorieDTO delete (CategorieDTO cat);
+	public CategorieDTO delete (CategorieDTO catDTO);
 
+	//modifier une categorie
+	public CategorieDTO update (Integer id, CategorieDTO catDTO);
+
+	//afficher les catégories
+	public List <CategorieDTO> recupereAll();
 
 
 }
