@@ -28,7 +28,6 @@ public class CategorieService implements ICategorieService {
 		return result;
 	}
 
-	@Override
 	public List<CategorieDTO> recupererAll() {
 		Iterator<Categorie> iterator = this.categorieRepository.findAll().iterator();
 		//toList
@@ -69,6 +68,12 @@ public class CategorieService implements ICategorieService {
 		result.setTitre(catDTO.getTitre());
 		result.setDescription(catDTO.getDescription());
 		return result;
+	}
+
+	@Override
+	public List<CategorieDTO> findForCategorie(CategorieDTO c) {
+		
+		return null;
 	}
 
 }
