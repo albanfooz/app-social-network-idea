@@ -40,9 +40,6 @@ public class MembreService implements IMembreService {
 	public List<MembreDTO> recupererAll() {
 		Iterator<Membre> iterator = membreRepository.findAll().iterator();
 
-
-
-
 		List<Membre> listM = new ArrayList<>();
 		List<MembreDTO> listDTO = new ArrayList<>();
 		// Add each element of iterator to the List
@@ -55,6 +52,7 @@ public class MembreService implements IMembreService {
 
 		return listDTO;
 	}
+
 	@Override
 	public MembreDTO getById(Integer idMembre) {
 		MembreDTO result = null;
