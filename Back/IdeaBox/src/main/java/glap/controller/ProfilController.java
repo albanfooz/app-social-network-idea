@@ -31,6 +31,11 @@ public class ProfilController {
 	public ProfilDTO findById(@PathVariable Integer id) {
 		return this.pService.getById(id);
 	}
+	@GetMapping("/m{id}")
+	@ResponseBody
+	public ProfilDTO findByMembreId(@PathVariable Integer id) {
+		return this.pService.getByMembreId(id);
+	}
 
 	@PostMapping
 	public ProfilDTO save(@RequestBody ProfilDTO profilDto) {
