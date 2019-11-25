@@ -3,15 +3,21 @@ package glap.service.impl;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import glap.DTO.membre.MembreDTO;
+import glap.DTO.profil.ProfilDTO;
 import glap.model.Membre;
 import glap.repository.IMembreRepository;
 import glap.service.IMembreService;
 
-public class MembreImpl implements IMembreService {
+@Service
+public class MembreService implements IMembreService {
 	@Autowired
 	private IMembreRepository membreRepository;
 
@@ -22,9 +28,12 @@ public class MembreImpl implements IMembreService {
 	}
 
 	@Override
-	public MembreDTO add(MembreDTO membreDTO) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public MembreDTO add() {
+		MembreDTO result = new MembreDTO();
+		Membre m = membreRepository.save(new Membre());
+		result.setId(m.getId());
+		return result;
 	}
 
 	@Override
@@ -41,11 +50,23 @@ public class MembreImpl implements IMembreService {
 		for (Membre membre : listM) {
 			MembreDTO mToPush = new MembreDTO();
 			mToPush.setId(membre.getId());
-			//mToPush.setPseudonyme(membre.get);
 			listDTO.add(mToPush);
 		}
 
 		return listDTO;
+	}
+	@Override
+	public MembreDTO getById(Integer idMembre) {
+		MembreDTO result = null;
+		// Atomic to set value in lambda
+		AtomicReference<ProfilDTO> value = new AtomicReference<>();
+		Optional<Membre> opt = this.membreRepository.findById(idMembre);
+		opt.ifPresent(profil ->{
+			MembreDTO temp = new MembreDTO();
+			//value.set();
+		});
+		//	result = value.get();
+		return result;
 	}
 
 }
