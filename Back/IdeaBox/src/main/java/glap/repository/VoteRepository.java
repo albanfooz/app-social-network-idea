@@ -18,14 +18,16 @@ public class VoteRepository {
 
 	public void save(Vote vote) {
 		this.em.persist(vote);
+		System.out.println("vote sauvegardé");
 	}
 
 	//modifier une idée
 	public int update(Integer id, Vote v) {
-		Query query = this.em.createQuery("Update Vote v Set v.positif=:positif WHERE i.id=:id");
+		Query query = this.em.createQuery("Update Vote v Set v.positif=:positif WHERE v.id=:id");
 		query.setParameter("positif", v.isPositif());
 		query.setParameter("id", id);
 		int result = query.executeUpdate();
+		System.out.println(3);
 		return result;
 	}
 	public Vote findById(Integer id) {

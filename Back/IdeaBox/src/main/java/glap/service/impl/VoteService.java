@@ -33,10 +33,12 @@ public class VoteService implements IVoteService {
 	}
 
 	@Override
-	public VoteDTO update(VoteDTO vote) {
-		Vote voteModel = this.voteRepository.findById(vote.getId());
+	public VoteDTO update(Integer id,VoteDTO vote) {
+		System.out.println(2);
+		Vote voteModel = this.voteRepository.findById(id);
 		voteModel.setPositif(vote.getPositif());
-		this.voteRepository.update(vote.getId(),voteModel);
+		voteModel.setCreatedAt(Calendar.getInstance().getTime());
+		this.voteRepository.update(id,voteModel);
 		return vote;
 	}
 
