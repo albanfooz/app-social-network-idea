@@ -2,6 +2,7 @@ package glap.service;
 
 import java.util.List;
 
+import glap.DTO.IdeeDTO;
 import glap.DTO.categorie.CategorieDTO;
 
 public interface ICategorieService {
@@ -15,8 +16,13 @@ public interface ICategorieService {
 	//modifier une categorie
 	public CategorieDTO update (Integer id, CategorieDTO catDTO);
 
-	//afficher les catégories
+	//afficher Toutes les catégories
 	public List <CategorieDTO> recupereAll();
 
+	//afficher une catégorie avec l'id
+	public CategorieDTO getById(Integer IdCategorie);
+
+	//afficher toutes les idées d'une catégorie
+	public List<IdeeDTO> findIdeeByCat (Integer IdCategorie);
 
 }
