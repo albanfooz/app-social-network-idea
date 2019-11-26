@@ -38,8 +38,8 @@ public class CommentaireService implements ICommentaireService {
 	}
 
 	@Override
-	public void delete() {
-		// TODO Auto-generated method stub
+	public void delete(int id) {
+		this.commentaireRepository.delete(id);
 	}
 
 	@Override
@@ -51,9 +51,9 @@ public class CommentaireService implements ICommentaireService {
 	}
 
 	@Override
-	public List<CommentaireDTO> findForComment(CommentaireDTO c) {
+	public List<CommentaireDTO> findForComment(int id) {
 		//obtenir la liste des commentaire aillant comme parent l'id de ce commentaire DTO
-		List<Commentaire> list=this.commentaireRepository.findByCommentaireId(c.getId());
+		List<Commentaire> list=this.commentaireRepository.findByCommentaireId(id);
 		//faire une boucle forEach pour transformer les commentaires en commentairesDTO
 		List<CommentaireDTO> result=new ArrayList<>();
 		for (Commentaire commentaire : list) {
@@ -63,9 +63,9 @@ public class CommentaireService implements ICommentaireService {
 	}
 
 	@Override
-	public List<CommentaireDTO> findForIdea(CommentaireDTO c) {
+	public List<CommentaireDTO> findForIdea(int id) {
 		//obtenir la liste des commentaire aillant comme parent l'id de l'idée liée ce commentaire DTO
-		List<Commentaire> list=this.commentaireRepository.findByIdeeId(c.getIdee().getId());
+		List<Commentaire> list=this.commentaireRepository.findByIdeeId(id);
 		//faire une boucle forEach pour transformer les commentaires en commentairesDTO
 		List<CommentaireDTO> result=new ArrayList<>();
 		for (Commentaire commentaire : list) {
