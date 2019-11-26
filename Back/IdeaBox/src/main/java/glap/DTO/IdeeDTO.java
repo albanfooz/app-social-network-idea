@@ -18,7 +18,7 @@ public class IdeeDTO {
 	private Set<Integer> collaborateurIds;
 	private Integer membreId;
 	private Integer categorieId;
-	private Set<Integer> voteI
+	private Integer score;
 	private LocalDateTime createdAt;
 	private LocalDateTime  deletedAt;
 }
