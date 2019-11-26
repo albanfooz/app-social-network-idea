@@ -76,7 +76,7 @@ public class Vote implements Serializable {
 		return this.positif;
 	}
 
-	public void setPositif(boolean positif) {
+	public void setPositif(Boolean positif) {
 		this.positif = positif;
 	}
 

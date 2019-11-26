@@ -58,8 +58,7 @@ public class VoteController {
 
 	@PutMapping
 	@RequestMapping("/{id}")
-	public VoteDTO update(@PathVariable int id,@RequestBody VoteDTO v) {
-		System.out.println(1);
+	public VoteDTO update(@PathVariable Integer id,@RequestBody VoteDTO v) {
 		VoteDTO result= this.voteService.update(id,v);
 		return result;
 	}

@@ -24,14 +24,19 @@ public class VoteRepository {
 	//modifier une idée
 	public int update(Integer id, Vote v) {
 		Query query = this.em.createQuery("Update Vote v Set v.positif=:positif WHERE v.id=:id");
-		query.setParameter("positif", v.isPositif());
+		if(v.isPositif()==null) {
+			query.setParameter("positif", null);
+		}else {
+			query.setParameter("positif", v.isPositif());
+		}
 		query.setParameter("id", id);
 		int result = query.executeUpdate();
-		System.out.println(3);
 		return result;
 	}
 	public Vote findById(Integer id) {
+		System.out.println("test3");
 		Vote result = this.em.find(Vote.class,id);
+		System.out.println(result.isPositif()+" test4");
 		return result;
 	}
 	public Vote findByCommentaireIdAndMembreId(Integer comId,Integer membreId) {

@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CommentaireDTO {
+	@JsonIgnore
 	private Integer id;
 	private String contenu;
 	private Date createdAt;
@@ -28,7 +29,6 @@ public class CommentaireDTO {
 		this.createdAt=createdAt;
 		this.idee=idee;
 		this.membre=membre;
-
 	}
 }
 
