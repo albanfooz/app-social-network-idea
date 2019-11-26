@@ -18,8 +18,7 @@ public class CategorieDTO {
 	private Set<Idee> idees;
 
 
-	public CategorieDTO (String categoriecol, String description, String titre, Set<Idee> idees) {
-		this.categoriecol=categoriecol;
+	public CategorieDTO (Set<Idee> idees, String description, String titre) {
 		this.description=description;
 		this.titre=titre;
 		this.idees=idees;

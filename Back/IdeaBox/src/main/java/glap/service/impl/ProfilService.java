@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import glap.DTO.membre.MembreDTO;
 import glap.DTO.profil.ProfilDTO;
 import glap.model.Membre;
 import glap.model.Profil;
-import glap.repository.IMembreRepository;
 import glap.repository.IProfilRepository;
 import glap.service.IProfilService;
 
@@ -26,7 +26,7 @@ public class ProfilService implements IProfilService {
 	@Autowired
 	private IProfilRepository profilRepository;
 	@Autowired
-	private IMembreRepository membreRepository;
+	private MembreService membreService;
 
 	@Override
 	public ProfilDTO update(Integer id, ProfilDTO profilDTO) {
@@ -38,8 +38,8 @@ public class ProfilService implements IProfilService {
 	@Transactional
 	public ProfilDTO add(ProfilDTO profilDTO) {
 		ProfilDTO result = new ProfilDTO();
-		if(profilDTO.getMembreId() == null) {
-			Membre tempMembre = membreRepository.save(new Membre());
+		if (profilDTO.getMembreId() == null) {
+			MembreDTO tempMembre = membreService.add();
 			profilDTO.setMembreId(tempMembre.getId());
 		}
 		Profil temp = this.profilDTOtoModel(profilDTO);
@@ -72,9 +72,11 @@ public class ProfilService implements IProfilService {
 		result.setMembreId(profil.getMembre().getId());
 		result.setScore(profil.getScore());
 
-		result.setCreatedAt(Instant.ofEpochMilli(profil.getCreatedAt().getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime());
+		result.setCreatedAt(
+				Instant.ofEpochMilli(profil.getCreatedAt().getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime());
 		if (profil.getDeletedAt() != null) {
-			result.setDeletedAt(Instant.ofEpochMilli(profil.getDeletedAt().getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime());
+			result.setDeletedAt(Instant.ofEpochMilli(profil.getDeletedAt().getTime()).atZone(ZoneId.systemDefault())
+					.toLocalDateTime());
 		}
 
 		return result;
@@ -88,9 +90,16 @@ public class ProfilService implements IProfilService {
 		result.setLogin(profilDTO.getLogin());
 		result.setPassword(profilDTO.getMdp());
 		result.setScore(profilDTO.getScore());
-		//membre to Membre id
-		Optional<Membre> opt = membreRepository.findById(profilDTO.getMembreId());
-		opt.ifPresent(membre -> { result.setMembre(membre);});
+
+		// membre to Membre id en passant par membreService
+		Membre tempMembre = new Membre();
+		if (profilDTO.getMembreId() != null) {
+			MembreDTO opt = membreService.getById(profilDTO.getMembreId());
+			tempMembre.setId(opt.getId());
+		} else {
+			tempMembre.setId(membreService.add().getId());
+		}
+		result.setMembre(tempMembre);
 
 		result.setCreatedAt(Date.valueOf(profilDTO.getCreatedAt().toLocalDate()));
 		if (profilDTO.getDeletedAt() != null) {
@@ -105,15 +114,23 @@ public class ProfilService implements IProfilService {
 		// Atomic to set value in lambda
 		AtomicReference<ProfilDTO> value = new AtomicReference<>();
 		Optional<Profil> opt = this.profilRepository.findById(idProfil);
-		opt.ifPresent(profil ->{value.set(this.profilModelToDTO(profil));});
+		opt.ifPresent(profil -> {
+			value.set(this.profilModelToDTO(profil));
+		});
 		result = value.get();
 		return result;
 	}
 
 	@Override
 	public ProfilDTO getByMembreId(Integer idMembre) {
-		// TODO Auto-generated method stub
-		return null;
+		ProfilDTO result = null;
+		Membre membreTemp = new Membre();
+		membreTemp.setId(idMembre);
+		List<Profil> list = this.profilRepository.findByMembre(membreTemp);
+		if (list.size() == 1) {
+			result = this.profilModelToDTO(list.get(0));
+		}
+		return result;
 	}
 
 }
