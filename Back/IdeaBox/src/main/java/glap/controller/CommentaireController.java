@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -56,6 +57,14 @@ public class CommentaireController {
 		return result;
 	}
 
+	@PutMapping
+	@RequestMapping("/modifier-{id}")
+	public CommentaireDTO update(@PathVariable Integer id, @RequestBody CommentaireDTO com) {
+		String contenu=com.getContenu();
+		CommentaireDTO result=this.commentaireService.update(id, contenu);
+		return result;
+	}
+
 	/**
 	 * L'url ici est "/messages/id", ou l'id est un entier fournit par le client
 	 * @param id : id du message
@@ -63,8 +72,7 @@ public class CommentaireController {
 	 */
 	@DeleteMapping
 	@RequestMapping("/supprimer-{id}")
-	public void removeById(@PathVariable int id) {
+	public void removeById(@PathVariable Integer id) {
 		this.commentaireService.delete(id);
-		System.out.println("suppresion du commentaire : " + id);
 	}
 }

@@ -30,6 +30,13 @@ public class CommentaireDTO {
 		this.idIdee=idIdee;
 		this.idMembre=idMembre;
 	}
+	//constructeur pour commentaire Idee retour
+	public CommentaireDTO(String contenu,Integer idIdee,Integer idMembre, Date createdAt){
+		this.contenu=contenu;
+		this.idIdee=idIdee;
+		this.idMembre=idMembre;
+		this.createdAt=createdAt;
+	}
 	//constructeur pour commentaire reponse
 	public CommentaireDTO(String contenu,Integer idIdee,Integer idMembre, Integer idCommentaire){
 		this.contenu=contenu;

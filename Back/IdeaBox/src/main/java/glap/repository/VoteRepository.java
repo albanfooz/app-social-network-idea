@@ -34,9 +34,7 @@ public class VoteRepository {
 		return result;
 	}
 	public Vote findById(Integer id) {
-		System.out.println("test3");
 		Vote result = this.em.find(Vote.class,id);
-		System.out.println(result.isPositif()+" test4");
 		return result;
 	}
 	public Vote findByCommentaireIdAndMembreId(Integer comId,Integer membreId) {

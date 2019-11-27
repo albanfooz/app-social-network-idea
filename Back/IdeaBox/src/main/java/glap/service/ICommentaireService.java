@@ -3,7 +3,6 @@ package glap.service;
 import java.util.List;
 
 import glap.DTO.CommentaireDTO;
-import glap.model.Commentaire;
 
 public interface ICommentaireService {
 
@@ -11,7 +10,7 @@ public interface ICommentaireService {
 	public void delete(int id);
 
 	//modifier un commentaire
-	public Commentaire update(CommentaireDTO c,String com);
+	CommentaireDTO update(Integer id, String contenu);
 
 	//afficher les commentaires d'un commentaire
 	List<CommentaireDTO> findForComment(int id);
@@ -22,4 +21,6 @@ public interface ICommentaireService {
 	CommentaireDTO addOnCommentaire(CommentaireDTO com);
 
 	CommentaireDTO addOnIdee(CommentaireDTO com);
+
+
 }

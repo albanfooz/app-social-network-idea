@@ -1,6 +1,7 @@
 package glap.repository;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -28,7 +29,7 @@ public class CommentaireRepository {
 	}
 
 	//supprimer un commentaire
-	public Integer delete(int id) {
+	public Integer delete(Integer id) {
 		Query query = this.em.createQuery("DELETE FROM Commentaire c where c.id=:id");
 		query.setParameter("id", id);
 		Integer result = query.executeUpdate();
@@ -36,9 +37,11 @@ public class CommentaireRepository {
 	}
 
 	//modifier un commentaire
-	public Commentaire updateMessage(Commentaire c, String message) {
-		Commentaire result = this.em.find(Commentaire.class,c.getId());
-		result.setContenu(message);
+	public Commentaire updateMessage(Integer id, String contenu) {
+		Commentaire result = this.em.find(Commentaire.class,id);
+		result.setContenu(contenu);
+		result.setCreatedAt(Calendar.getInstance().getTime());
+		System.out.println(result.toString());
 		return result;
 	}
 
@@ -57,6 +60,10 @@ public class CommentaireRepository {
 		TypedQuery<Commentaire> query = this.em.createQuery("SELECT c FROM Commentaire c where c.idee.id=:id",Commentaire.class);
 		query.setParameter("id", id);
 		result= query.getResultList();
+		return result;
+	}
+	public Commentaire findById(Integer id) {
+		Commentaire result=this.em.find(Commentaire.class, id);
 		return result;
 	}
 }
