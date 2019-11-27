@@ -31,7 +31,7 @@ public class IdeeService implements IIdeeService {
 	@Override
 	public List<IdeeDTO> recupererAll() {
 		Iterator<Idee> iterator = this.ideeRepository.findAll().iterator();
-		//TODO
+
 		List<Idee> listI = new ArrayList<>();
 		List<IdeeDTO> listDTO = new ArrayList<>();
 		// Add each element of iterator to the List
