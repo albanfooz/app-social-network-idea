@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import glap.DTO.IdeeDTO;
 import glap.DTO.categorie.CategorieDTO;
 import glap.model.Categorie;
+import glap.model.Idee;
 import glap.repository.ICategorieRepository;
 import glap.service.ICategorieService;
 
@@ -99,13 +101,26 @@ public class CategorieService implements ICategorieService {
 	}
 
 	@Override
-	public <IdeeDTO> findIdeeByCat(Integer IdCategorie) {
-		ListCat findByCategorieId
-		List<IdeeDTO> listIdeeDTO = new ArrayList<>();
+	public List<IdeeDTO> findIdeeByCat(Integer IdCat) {
+		CategorieDTO result =null;
+		AtomicReference<CategorieDTO> value = new AtomicReference<>();
+		Optional<Idee> opt = this.ideeRepository.findById(IdCat);
+		opt.
 		return null;
+
+
 	}
 
+	/*
+	 * Service
+FindIdeesByCat( Integer idCat)
 
+    X = Cat.findbyId(idCAt)     retourne catergorieModel
+    X.getIdees()            	retourne un Set<IdeeModel>
+    Transformer Set<IdeeModel> en Set<Integer> (IdeeModel -> IdeesId)
+
+	retourne Set<Integer> IdeesId;
+	 */
 
 
 
