@@ -117,6 +117,8 @@ public class ProfilService implements IProfilService {
 		opt.ifPresent(profil -> {
 			value.set(this.profilModelToDTO(profil));
 		});
+
+
 		result = value.get();
 		return result;
 	}
