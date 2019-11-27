@@ -104,9 +104,10 @@ public class CategorieService implements ICategorieService {
 	}
 
 	@Override
+
+	//trouver toute les idées appartenant à une categorie
 	public List<Integer> findIdeeByCategorie(Integer idCat) {
 		List<Integer> result = new ArrayList<>();
-		List<Categorie> listCat = new ArrayList<>();
 
 		//categorie = Cat.findbyId(idCAt) 	retourne catergorieModel
 		Optional<Categorie> optCat = this.categorieRepository.findById(idCat);
@@ -122,7 +123,7 @@ public class CategorieService implements ICategorieService {
 			//Transformer List<Idee> en List<Integer> (IdeeModel -> IdeesId)
 			List<Idee> listIdees = new ArrayList<>(setIdees);
 
-			//Boucle for each add chaque idee.getID de la listidees dans result.
+			//Boucle for each add chaque idee.getID de la listIdees dans result.
 			for (Idee idee : listIdees) {
 				result.add(idee.getId());
 			}

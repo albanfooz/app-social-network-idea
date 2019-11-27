@@ -9,4 +9,5 @@ import glap.model.Profil;
 
 public interface IProfilRepository extends PagingAndSortingRepository<Profil, Integer> {
 	List<Profil> findByMembre(Membre membre);
+
 }

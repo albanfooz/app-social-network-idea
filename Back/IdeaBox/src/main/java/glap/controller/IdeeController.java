@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import glap.DTO.IdeeDTO;
 import glap.service.impl.CategorieService;
 import glap.service.impl.IdeeService;
+import glap.service.impl.MembreService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -22,6 +23,8 @@ public class IdeeController {
 	private IdeeService iService;
 	@Autowired
 	private CategorieService catService;
+	@Autowired
+	private MembreService membreService;
 
 	@GetMapping
 	public List<IdeeDTO> findAll() {
@@ -33,6 +36,13 @@ public class IdeeController {
 	// recuperer ici la methode findIdeeByCategorie de CategorieService
 	public List<Integer> findById(@PathVariable Integer idCat) {
 		return this.catService.findIdeeByCategorie(idCat);
+	}
+
+	@GetMapping ("/membre/{idMembre}")
+	@ResponseBody
+	// récupérer ici la methode findIdeeByMembre de MmembreService
+	public List<Integer> findByIdMembre(@PathVariable Integer idMembre) {
+		return this.membreService.findIdeeByMembre(idMembre);
 	}
 
 

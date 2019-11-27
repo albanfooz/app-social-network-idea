@@ -36,4 +36,13 @@ public interface IMembreService {
 	public List<MembreDTO> recupererAll();
 	public MembreDTO getById(Integer idMembre);
 
+
+
+	/**
+	 * Récuperer toutes les idéées appartenant à un membre
+	 * @param idMembrel
+	 * @return ideeDTO si ok sinon null
+	 */
+	public List<Integer> findIdeeByMembre (Integer idMembre);
+
 }
