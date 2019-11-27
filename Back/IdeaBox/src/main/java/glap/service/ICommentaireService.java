@@ -6,8 +6,6 @@ import glap.DTO.CommentaireDTO;
 import glap.model.Commentaire;
 
 public interface ICommentaireService {
-	//ajouter un commentaire
-	public CommentaireDTO add(CommentaireDTO com);
 
 	//supprimer un commentaire
 	public void delete(int id);
@@ -21,4 +19,7 @@ public interface ICommentaireService {
 	//afficher les commentaires d'une idée
 	public List<CommentaireDTO> findForIdea(int id);
 
+	CommentaireDTO addOnCommentaire(CommentaireDTO com);
+
+	CommentaireDTO addOnIdee(CommentaireDTO com);
 }

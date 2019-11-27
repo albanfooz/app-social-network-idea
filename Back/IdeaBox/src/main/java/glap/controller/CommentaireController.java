@@ -30,7 +30,6 @@ public class CommentaireController {
 	@RequestMapping("/idee-{id}")
 	public List<CommentaireDTO> findForIdee(@PathVariable int id) {
 		List<CommentaireDTO> result =this.commentaireService.findForIdea(id);
-
 		return result;
 	}
 
@@ -44,8 +43,16 @@ public class CommentaireController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public CommentaireDTO save(@RequestBody CommentaireDTO c) {
-		CommentaireDTO result= this.commentaireService.add(c);
+	public CommentaireDTO saveOnIdee(@RequestBody CommentaireDTO c) {
+		CommentaireDTO result= this.commentaireService.addOnIdee(c);
+		return result;
+	}
+
+	@PostMapping
+	@RequestMapping("/reponse")
+	@ResponseStatus(HttpStatus.CREATED)
+	public CommentaireDTO saveOnCommentaire(@RequestBody CommentaireDTO c) {
+		CommentaireDTO result= this.commentaireService.addOnCommentaire(c);
 		return result;
 	}
 

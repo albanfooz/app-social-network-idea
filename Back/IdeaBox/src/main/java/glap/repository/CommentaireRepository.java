@@ -48,7 +48,6 @@ public class CommentaireRepository {
 		TypedQuery<Commentaire> query = this.em.createQuery("SELECT c FROM Commentaire c where c.commentaire.id=:id",Commentaire.class);
 		query.setParameter("id", id);
 		result= query.getResultList();
-		System.out.println(result.toString());
 		return result;
 	}
 
@@ -58,7 +57,6 @@ public class CommentaireRepository {
 		TypedQuery<Commentaire> query = this.em.createQuery("SELECT c FROM Commentaire c where c.idee.id=:id",Commentaire.class);
 		query.setParameter("id", id);
 		result= query.getResultList();
-		System.out.println(result.toString());
 		return result;
 	}
 }

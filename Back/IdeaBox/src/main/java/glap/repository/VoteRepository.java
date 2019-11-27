@@ -51,6 +51,7 @@ public class VoteRepository {
 		}
 		return result;
 	}
+
 	public Vote findByIdeeIdAndMembreId(Integer ididee, Integer idmembre) {
 		Query query = this.em.createQuery("SELECT v FROM Vote v where v.idee.id=:id and v.membre.id=:idM",Vote.class);
 		query.setParameter("id", ididee);

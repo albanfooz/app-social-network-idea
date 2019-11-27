@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import glap.DTO.CommentaireDTO;
 import glap.model.Commentaire;
 import glap.repository.CommentaireRepository;
+import glap.repository.IdeeRepository;
 import glap.service.ICommentaireService;
 
 /**
@@ -21,16 +22,32 @@ public class CommentaireService implements ICommentaireService {
 
 	@Autowired
 	private CommentaireRepository commentaireRepository;
+	@Autowired
+	private IdeeRepository ideeRepository;
 
 	@Override
-	public CommentaireDTO add(CommentaireDTO com) {
+	public CommentaireDTO addOnIdee(CommentaireDTO com) {
 		Commentaire comModel = new Commentaire();
-
 		comModel.setContenu(com.getContenu());
 		// code pour test
 		comModel.setCreatedAt(com.getCreatedAt());
 		comModel.setIdee(com.getIdee());
-		comModel.setMembre(com.getMembre());
+		comModel.setMembre(com.getIdMembre());
+		//fin code pour test
+		this.commentaireRepository.save(comModel);
+		com.setId(comModel.getId());
+		return com;
+	}
+
+	@Override
+	public CommentaireDTO addOnCommentaire(CommentaireDTO com) {
+		Commentaire comModel = new Commentaire();
+		comModel.setContenu(com.getContenu());
+		// code pour test
+		comModel.setCreatedAt(com.getCreatedAt());
+		comModel.setIdee(this.ideeRepository.findById((com.getIdIdee())));
+		comModel.setMembre(com.getIdMembre());
+		comModel.setCommentaire(com.getIdCommentaire());
 		//fin code pour test
 		this.commentaireRepository.save(comModel);
 		com.setId(comModel.getId());
