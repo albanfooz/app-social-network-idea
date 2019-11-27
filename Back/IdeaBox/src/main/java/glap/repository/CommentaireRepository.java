@@ -28,9 +28,9 @@ public class CommentaireRepository {
 	}
 
 	//supprimer un commentaire
-	public Integer delete(Commentaire c) {
+	public Integer delete(int id) {
 		Query query = this.em.createQuery("DELETE FROM Commentaire c where c.id=:id");
-		query.setParameter("id", c.getId());
+		query.setParameter("id", id);
 		Integer result = query.executeUpdate();
 		return result;
 	}
@@ -45,18 +45,20 @@ public class CommentaireRepository {
 	//trouver tous les commentaires liés à un autre commentaire
 	public List<Commentaire> findByCommentaireId(Integer id) {
 		List<Commentaire> result = new ArrayList<>();
-		TypedQuery<Commentaire> query = this.em.createQuery("SELECT * FROM Commentaire c where c.commentaire_id=:id",Commentaire.class);
+		TypedQuery<Commentaire> query = this.em.createQuery("SELECT c FROM Commentaire c where c.commentaire.id=:id",Commentaire.class);
 		query.setParameter("id", id);
 		result= query.getResultList();
+		System.out.println(result.toString());
 		return result;
 	}
 
 	//Trouver les comentaires liés à une idée
 	public List<Commentaire> findByIdeeId(Integer id) {
 		List<Commentaire> result = new ArrayList<>();
-		TypedQuery<Commentaire> query = this.em.createQuery("SELECT * FROM Commentaire c where c.idee_id=:id",Commentaire.class);
+		TypedQuery<Commentaire> query = this.em.createQuery("SELECT c FROM Commentaire c where c.idee.id=:id",Commentaire.class);
 		query.setParameter("id", id);
 		result= query.getResultList();
+		System.out.println(result.toString());
 		return result;
 	}
 }

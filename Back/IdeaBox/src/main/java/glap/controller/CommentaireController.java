@@ -1,6 +1,5 @@
 package glap.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import glap.DTO.CommentaireDTO;
-import glap.model.Commentaire;
 import glap.service.impl.CommentaireService;
 
 @RestController
@@ -29,8 +27,17 @@ public class CommentaireController {
 	}
 
 	@GetMapping
-	public List<Commentaire> findAll() {
-		List<Commentaire> result = new ArrayList<>();
+	@RequestMapping("/idee-{id}")
+	public List<CommentaireDTO> findForIdee(@PathVariable int id) {
+		List<CommentaireDTO> result =this.commentaireService.findForIdea(id);
+
+		return result;
+	}
+
+	@GetMapping
+	@RequestMapping("/commentaire-{id}")
+	public List<CommentaireDTO> findForCommentaire(@PathVariable int id) {
+		List<CommentaireDTO> result = this.commentaireService.findForComment(id);
 
 		return result;
 	}
@@ -48,9 +55,9 @@ public class CommentaireController {
 	 * @return
 	 */
 	@DeleteMapping
-	@RequestMapping("/{id}")
-	public String removeById(@PathVariable int id) {
+	@RequestMapping("/supprimer-{id}")
+	public void removeById(@PathVariable int id) {
+		this.commentaireService.delete(id);
 		System.out.println("suppresion du commentaire : " + id);
-		return "commentaire bien supprimé";
 	}
 }
