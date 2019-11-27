@@ -8,8 +8,5 @@ public class IdeaBoxApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(IdeaBoxApplication.class, args);
-
-
 	}
-
 }

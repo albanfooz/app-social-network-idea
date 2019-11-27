@@ -1,16 +1,16 @@
 package glap.service.impl;
 
 import java.util.Calendar;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import glap.DTO.VoteDTO;
 import glap.model.Vote;
 import glap.repository.VoteRepository;
 import glap.service.IVoteService;
 
-
+@Service
 public class VoteService implements IVoteService {
 	@Autowired
 	private VoteRepository voteRepository;
@@ -33,23 +33,41 @@ public class VoteService implements IVoteService {
 	}
 
 	@Override
-	public VoteDTO update(VoteDTO vote) {
-		Vote voteModel = this.voteRepository.findById(vote.getId());
+	public VoteDTO update(Integer id,VoteDTO vote) {
+		Vote voteModel = this.voteRepository.findById(id);
 		voteModel.setPositif(vote.getPositif());
-		this.voteRepository.update(vote.getId(),voteModel);
+		voteModel.setCreatedAt(Calendar.getInstance().getTime());
+		this.voteRepository.update(id,voteModel);
 		return vote;
 	}
 
 	@Override
-	public List<Vote> findDownVote() {
-		// TODO Auto-generated method stub
-		return null;
+	public VoteDTO findVoteByMemberIdAndCommentaireId(int idcom,int idmembre) {
+		Vote vote = this.voteRepository.findByCommentaireIdAndMembreId(idcom,idmembre);
+		VoteDTO result=null;
+		if(vote!=null) {
+			result=new VoteDTO(vote.getId(),vote.isPositif(),vote.getCommentaire(),vote.getIdee(),vote.getMembre());
+		}
+		return result;
 	}
 
 	@Override
-	public List<Vote> findUpVote() {
-		// TODO Auto-generated method stub
-		return null;
+	public VoteDTO findByMemberIdAndIdeeId(int ididee,int idmembre) {
+		Vote vote = this.voteRepository.findByIdeeIdAndMembreId(ididee,idmembre);
+		VoteDTO result=new VoteDTO(vote.getId(),vote.isPositif(),vote.getCommentaire(),vote.getIdee(),vote.getMembre());
+		return result;
+	}
+
+	@Override
+	public long findScoreByCommentaireId(int id) {
+		long result=this.voteRepository.findCommentaireScore(id);
+		return result;
+	}
+
+	@Override
+	public long findScoreByIdeeId(int id) {
+		long result=this.voteRepository.findIdeeScore(id);
+		return result;
 	}
 
 }

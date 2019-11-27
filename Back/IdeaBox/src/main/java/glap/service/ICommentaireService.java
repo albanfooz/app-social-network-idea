@@ -10,15 +10,15 @@ public interface ICommentaireService {
 	public CommentaireDTO add(CommentaireDTO com);
 
 	//supprimer un commentaire
-	public void delete();
+	public void delete(int id);
 
 	//modifier un commentaire
 	public Commentaire update(CommentaireDTO c,String com);
 
 	//afficher les commentaires d'un commentaire
-	List<CommentaireDTO> findForComment(CommentaireDTO c);
+	List<CommentaireDTO> findForComment(int id);
 
 	//afficher les commentaires d'une idée
-	public List<CommentaireDTO> findForIdea(CommentaireDTO c);
+	public List<CommentaireDTO> findForIdea(int id);
 
 }
