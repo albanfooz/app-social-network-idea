@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -30,7 +31,6 @@ public class CommentaireController {
 	@RequestMapping("/idee-{id}")
 	public List<CommentaireDTO> findForIdee(@PathVariable int id) {
 		List<CommentaireDTO> result =this.commentaireService.findForIdea(id);
-
 		return result;
 	}
 
@@ -44,8 +44,24 @@ public class CommentaireController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public CommentaireDTO save(@RequestBody CommentaireDTO c) {
-		CommentaireDTO result= this.commentaireService.add(c);
+	public CommentaireDTO saveOnIdee(@RequestBody CommentaireDTO c) {
+		CommentaireDTO result= this.commentaireService.addOnIdee(c);
+		return result;
+	}
+
+	@PostMapping
+	@RequestMapping("/reponse")
+	@ResponseStatus(HttpStatus.CREATED)
+	public CommentaireDTO saveOnCommentaire(@RequestBody CommentaireDTO c) {
+		CommentaireDTO result= this.commentaireService.addOnCommentaire(c);
+		return result;
+	}
+
+	@PutMapping
+	@RequestMapping("/modifier-{id}")
+	public CommentaireDTO update(@PathVariable Integer id, @RequestBody CommentaireDTO com) {
+		String contenu=com.getContenu();
+		CommentaireDTO result=this.commentaireService.update(id, contenu);
 		return result;
 	}
 
@@ -56,8 +72,7 @@ public class CommentaireController {
 	 */
 	@DeleteMapping
 	@RequestMapping("/supprimer-{id}")
-	public void removeById(@PathVariable int id) {
+	public void removeById(@PathVariable Integer id) {
 		this.commentaireService.delete(id);
-		System.out.println("suppresion du commentaire : " + id);
 	}
 }

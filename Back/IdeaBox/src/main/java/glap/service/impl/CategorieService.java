@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import glap.DTO.IdeeDTO;
 import glap.DTO.categorie.CategorieDTO;
 import glap.model.Categorie;
-import glap.model.Idee;
 import glap.repository.ICategorieRepository;
 import glap.repository.IIdeeRepository;
 import glap.service.ICategorieService;
@@ -102,6 +102,7 @@ public class CategorieService implements ICategorieService {
 		result=value.get();
 		return result;
 	}
+
 
 	@Override
 
