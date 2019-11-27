@@ -122,6 +122,7 @@ public class ProfilService implements IProfilService {
 	}
 
 	@Override
+	//methode profil par membre
 	public ProfilDTO getByMembreId(Integer idMembre) {
 		ProfilDTO result = null;
 		Membre membreTemp = new Membre();
