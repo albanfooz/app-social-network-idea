@@ -2,7 +2,6 @@ package glap.service;
 
 import java.util.List;
 
-import glap.DTO.IdeeDTO;
 import glap.DTO.categorie.CategorieDTO;
 
 public interface ICategorieService {
@@ -23,6 +22,6 @@ public interface ICategorieService {
 	public CategorieDTO getById(Integer IdCategorie);
 
 	//afficher toutes les idées d'une catégorie
-	public List<IdeeDTO> findIdeeByCat (Integer IdCategorie);
+	public List<Integer> findIdeeByCategorie (Integer IdCategorie);
 
 }

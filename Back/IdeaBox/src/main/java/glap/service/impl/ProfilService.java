@@ -39,7 +39,7 @@ public class ProfilService implements IProfilService {
 	public ProfilDTO add(ProfilDTO profilDTO) {
 		ProfilDTO result = new ProfilDTO();
 		if (profilDTO.getMembreId() == null) {
-			MembreDTO tempMembre = membreService.add();
+			MembreDTO tempMembre = this.membreService.add();
 			profilDTO.setMembreId(tempMembre.getId());
 		}
 		Profil temp = this.profilDTOtoModel(profilDTO);
@@ -49,7 +49,7 @@ public class ProfilService implements IProfilService {
 
 	@Override
 	public List<ProfilDTO> recupererAll() {
-		Iterator<Profil> iterator = profilRepository.findAll().iterator();
+		Iterator<Profil> iterator = this.profilRepository.findAll().iterator();
 		// to list
 		List<Profil> listP = new ArrayList<>();
 		List<ProfilDTO> listDTO = new ArrayList<>();
@@ -94,10 +94,10 @@ public class ProfilService implements IProfilService {
 		// membre to Membre id en passant par membreService
 		Membre tempMembre = new Membre();
 		if (profilDTO.getMembreId() != null) {
-			MembreDTO opt = membreService.getById(profilDTO.getMembreId());
+			MembreDTO opt = this.membreService.getById(profilDTO.getMembreId());
 			tempMembre.setId(opt.getId());
 		} else {
-			tempMembre.setId(membreService.add().getId());
+			tempMembre.setId(this.membreService.add().getId());
 		}
 		result.setMembre(tempMembre);
 
@@ -132,5 +132,7 @@ public class ProfilService implements IProfilService {
 		}
 		return result;
 	}
+
+
 
 }
