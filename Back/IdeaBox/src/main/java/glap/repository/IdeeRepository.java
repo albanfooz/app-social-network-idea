@@ -45,7 +45,6 @@ public class IdeeRepository {
 		return result;
 	}
 
-
 	//trouver tous les commentaires liés à un autre commentaire
 	public List<Commentaire> findByCommentaireId(Integer id) {
 		List<Commentaire> result = new ArrayList<>();

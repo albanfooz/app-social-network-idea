@@ -59,7 +59,7 @@ public class CategorieRepository {
 	}
 
 	// trouver des idées liés à une categorie à placer dans le serviceRepository
-	public Set<Idee> findByCategorieId(Integer id) {
+	public Set<Idee> findIdeeByCategorie(Integer id) {
 		Set<Idee> result;
 		TypedQuery<Categorie> query = this.em.createQuery("SELECT c FROM Categorie c WHERE c.id=:id",Categorie.class);
 		query.setParameter("id", id);
