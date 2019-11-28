@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import glap.DTO.membre.MembreDTO;
 import glap.DTO.profil.ProfilDTO;
+import glap.model.Commentaire;
 import glap.model.Idee;
 import glap.model.Membre;
 import glap.repository.IMembreRepository;
@@ -102,4 +103,31 @@ public class MembreService implements IMembreService {
 		return result;
 	}
 
+	//methode pour afficher tout les commentaire lié à un membre
+	public List<Integer> findCommentaireByMember (Integer idMmeber) {
+		List<Integer> result = new ArrayList<>();
+
+		//membre = pro.finById(idPro) retourne MembreModel avec optional
+		Optional<Membre> optMembre = this.membreRepository.findById(idMmeber);
+
+		//membre.getCommentaire /() retourne <setCommentaireModel>
+		if (optMembre.isPresent()) {
+			Membre membre = optMembre.get();
+
+			//transformer Set<Commentaire> en List List<Commnetaire> 2 etape
+			Set<Commentaire> setCommentaire = membre.getCommentaires();
+
+			//transformer List<commentaires en list <integer> (CommentaireModel -> CommentaireId)
+			List<Commentaire> listCommentaires = new ArrayList<>(setCommentaire);
+
+			// voucle for each add chaque commmentaire.getId de la listCommentaire dans result.
+			for (Commentaire commentaire : listCommentaires) {
+				result.add(commentaire.getId());
+			}
+		} else {
+			result = null;
+		}
+		return result;
+
+	}
 }
