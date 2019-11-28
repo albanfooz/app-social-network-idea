@@ -1,5 +1,6 @@
 package glap.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,15 +42,19 @@ public class IdeeController {
 	@GetMapping ("/categorie/{idCat}")
 	@ResponseBody
 	// recuperer ici la methode findIdeeByCategorie de CategorieService
-	public List<Integer> findById(@PathVariable Integer idCat) {
-		return this.catService.findIdeeByCategorie(idCat);
+	public List<IdeeDTO> findById(@PathVariable Integer idCat) {
+		List<IdeeDTO> result =  new ArrayList<>();
+		this.catService.findIdeeByCategorie(idCat).forEach(element -> {result.add(this.iService.getById(idCat));});
+		return result;
 	}
 
 	@GetMapping ("/membre/{idMembre}")
 	@ResponseBody
 	// récupérer ici la methode findIdeeByMembre de MmembreService
-	public List<Integer> findByIdMembre(@PathVariable Integer idMembre) {
-		return this.membreService.findIdeeByMembre(idMembre);
+	public List<IdeeDTO> findByIdMembre(@PathVariable Integer idMembre) {
+		List<IdeeDTO> result =  new ArrayList<>();
+		this.membreService.findIdeeByMembre(idMembre).forEach(element ->{result.add(this.iService.getById(element));});
+		return result ;
 	}
 
 	@PostMapping
