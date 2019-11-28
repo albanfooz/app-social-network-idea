@@ -76,6 +76,9 @@ public class IdeeService implements IIdeeService {
 		//Titre
 		result.setTitre(idee.getTitre());
 
+		//description
+		result.setDescription(idee.getDescription());
+
 		//collabId
 		Set<Integer> setCollabIds = new HashSet<>();
 		idee.getCollaborteurs().forEach(element -> { setCollabIds.add(element.getId());});
