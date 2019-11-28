@@ -117,11 +117,14 @@ public class ProfilService implements IProfilService {
 		opt.ifPresent(profil -> {
 			value.set(this.profilModelToDTO(profil));
 		});
+
+
 		result = value.get();
 		return result;
 	}
 
 	@Override
+	//methode profil par membre
 	public ProfilDTO getByMembreId(Integer idMembre) {
 		ProfilDTO result = null;
 		Membre membreTemp = new Membre();

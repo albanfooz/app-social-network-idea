@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import glap.DTO.CommentaireDTO;
 import glap.service.impl.CommentaireService;
+import glap.service.impl.MembreService;
 
 @RestController
 @RequestMapping("/commentaires")
@@ -26,6 +28,8 @@ public class CommentaireController {
 	public CommentaireController( CommentaireService cService) {
 		this.commentaireService = cService;
 	}
+	@Autowired
+	private MembreService membreService;
 
 	@GetMapping
 	@RequestMapping("/idee-{id}")
@@ -75,4 +79,13 @@ public class CommentaireController {
 	public void removeById(@PathVariable Integer id) {
 		this.commentaireService.delete(id);
 	}
+
+	@GetMapping ("/membre/{idMembre}")
+	@ResponseBody
+	// recupérer ici la methode findCommentaireByMmebre de Mmembre service
+	public List<Integer> findCommentaireByMember (@PathVariable Integer idMembre) {
+		return this.membreService.findCommentaireByMember(idMembre);
+	}
+
+
 }
