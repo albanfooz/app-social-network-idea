@@ -11,23 +11,55 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import glap.DTO.IdeeDTO;
 import glap.model.Idee;
+import glap.repository.ICategorieRepository;
 import glap.repository.IIdeeRepository;
+import glap.repository.IMembreRepository;
 import glap.service.IIdeeService;
 
 @Service
 public class IdeeService implements IIdeeService {
 	@Autowired
 	private IIdeeRepository ideeRepository;
+	@Autowired
+	private ICategorieRepository catRepository;
+	@Autowired
+	private IMembreRepository membreRepository;
+
 
 	@Autowired
 	private VoteService voteService;
+
+
 	@Override
+	@Transactional
 	public IdeeDTO add(IdeeDTO ideeDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		Idee result = new Idee();
+
+		//id (using DB default)
+
+		//catId
+		result.setCategorie(catRepository.findById( ideeDTO.getCategorieId()).get());
+
+		//Titre
+		result.setTitre(ideeDTO.getTitre());
+
+		//description
+		result.setDescription(ideeDTO.getDescription());
+
+		//collabId (none)
+
+		//membreId (Original Posteur)
+		result.setMembre(membreRepository.findById(ideeDTO.getMembreId()).get());
+
+		//Score(not in DB)
+
+		//Dates (using DB default)
+
+		return this.ideeModelToDTO(ideeRepository.save(result));
 	}
 
 	@Override

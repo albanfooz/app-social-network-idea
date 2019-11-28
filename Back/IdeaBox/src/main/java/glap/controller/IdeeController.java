@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,6 +50,14 @@ public class IdeeController {
 	// récupérer ici la methode findIdeeByMembre de MmembreService
 	public List<Integer> findByIdMembre(@PathVariable Integer idMembre) {
 		return this.membreService.findIdeeByMembre(idMembre);
+	}
+
+	@PostMapping
+	@ResponseBody
+	public IdeeDTO save(@RequestBody IdeeDTO ideeDTO) {
+
+		return this.iService.add(ideeDTO);
+
 	}
 
 
