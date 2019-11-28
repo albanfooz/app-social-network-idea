@@ -22,7 +22,8 @@ public class IdeeService implements IIdeeService {
 	@Autowired
 	private IIdeeRepository ideeRepository;
 
-
+	@Autowired
+	private VoteService voteService;
 	@Override
 	public IdeeDTO add(IdeeDTO ideeDTO) {
 		// TODO Auto-generated method stub
@@ -88,7 +89,7 @@ public class IdeeService implements IIdeeService {
 		result.setMembreId(idee.getMembre().getId());
 
 		//Score
-		result.setScore(1000); //TODO fix bouchon with vote
+		result.setScore((int) (voteService.findScoreByIdeeId(idee.getId())*54.66)); //TODO fix bouchon with vote
 
 
 		//Dates
