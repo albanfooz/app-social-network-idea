@@ -50,6 +50,4 @@ public interface IProfilService {
 	 */
 	public ProfilDTO getByMembreId(Integer idMembre) ;
 
-
-
 }

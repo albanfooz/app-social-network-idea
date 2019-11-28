@@ -53,4 +53,8 @@ public class IdeeRepository {
 		result= query.getResultList();
 		return result;
 	}
+	public Idee findById(Integer id) {
+		Idee result = this.em.find(Idee.class,id);
+		return result;
+	}
 }

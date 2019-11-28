@@ -29,7 +29,6 @@ public class CategorieController {
 	@ResponseBody
 	public CategorieDTO findById (@PathVariable Integer id) {
 		return this.catService.getById(id);
-
 	}
 
 	@PostMapping
@@ -37,4 +36,6 @@ public class CategorieController {
 		CategorieDTO result = new CategorieDTO();
 		return this.catService.add(CatDto);
 	}
+
+
 }

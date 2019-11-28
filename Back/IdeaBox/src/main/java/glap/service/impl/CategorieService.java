@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import glap.DTO.categorie.CategorieDTO;
 import glap.model.Categorie;
 import glap.model.Idee;
 import glap.repository.ICategorieRepository;
+import glap.repository.IIdeeRepository;
 import glap.service.ICategorieService;
 
 @Service
@@ -21,6 +23,8 @@ public class CategorieService implements ICategorieService {
 
 	@Autowired
 	private ICategorieRepository categorieRepository;
+	@Autowired
+	private IIdeeRepository ideeRepository;
 
 
 	@Override
@@ -58,6 +62,7 @@ public class CategorieService implements ICategorieService {
 		}
 		return listCatDTO;
 	}
+
 
 	//
 	private CategorieDTO CategorieModelToDTO (Categorie cat) {
@@ -98,11 +103,39 @@ public class CategorieService implements ICategorieService {
 		return result;
 	}
 
+
 	@Override
-	public List<Idee> getByIdeeId(Integer IdCategorie) {
-		// TODO Auto-generated method stub
-		return null;
+
+	//trouver toute les idées appartenant à une categorie
+	public List<Integer> findIdeeByCategorie(Integer idCat) {
+		List<Integer> result = new ArrayList<>();
+
+		//categorie = Cat.findbyId(idCAt) 	retourne catergorieModel
+		Optional<Categorie> optCat = this.categorieRepository.findById(idCat);
+
+		//categorie.getIdees()			retourne un Set<IdeeModel>
+		if (optCat.isPresent()) {
+
+			Categorie categorie = optCat.get();
+
+			// Transformer Set<Idee> en List<Idee>
+			Set<Idee> setIdees = categorie.getIdees();
+
+			//Transformer List<Idee> en List<Integer> (IdeeModel -> IdeesId)
+			List<Idee> listIdees = new ArrayList<>(setIdees);
+
+			//Boucle for each add chaque idee.getID de la listIdees dans result.
+			for (Idee idee : listIdees) {
+				result.add(idee.getId());
+			}
+		} else {
+			result = null;
+		}
+
+		//retourne  List<Integer> IdeesId;
+		return result;
 	}
+
 
 
 }
