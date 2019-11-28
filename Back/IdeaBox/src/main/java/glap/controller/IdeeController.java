@@ -30,6 +30,11 @@ public class IdeeController {
 	public List<IdeeDTO> findAll() {
 		return this.iService.recupererAll();
 	}
+	@GetMapping("/{id}")
+	@ResponseBody
+	public IdeeDTO finById(@PathVariable Integer id) {
+		return this.iService.getById(id);
+	}
 
 	@GetMapping ("/categorie/{idCat}")
 	@ResponseBody

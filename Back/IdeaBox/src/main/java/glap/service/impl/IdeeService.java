@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,14 @@ public class IdeeService implements IIdeeService {
 
 	@Override
 	public IdeeDTO getById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		IdeeDTO result = new IdeeDTO();
+		Optional<Idee> opt = this.ideeRepository.findById(id);
+		if(opt.isPresent()) {
+			result = this.ideeModelToDTO(opt.get());
+		}else {
+			result = null;
+		}
+		return result;
 	}
 
 	private IdeeDTO ideeModelToDTO(Idee idee) {
