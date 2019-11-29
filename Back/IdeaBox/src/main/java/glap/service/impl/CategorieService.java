@@ -125,7 +125,7 @@ public class CategorieService implements ICategorieService {
 			List<Idee> listIdees = new ArrayList<>(setIdees);
 
 			//Boucle for each add chaque idee.getID de la listIdees dans result.
-			for (Idee idee : listIdees) {
+			for (Idee idee : setIdees) {
 				result.add(idee.getId());
 			}
 		} else {

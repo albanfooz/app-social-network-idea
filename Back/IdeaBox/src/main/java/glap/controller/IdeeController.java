@@ -44,7 +44,7 @@ public class IdeeController {
 	// recuperer ici la methode findIdeeByCategorie de CategorieService
 	public List<IdeeDTO> findById(@PathVariable Integer idCat) {
 		List<IdeeDTO> result =  new ArrayList<>();
-		this.catService.findIdeeByCategorie(idCat).forEach(element -> {result.add(this.iService.getById(idCat));});
+		this.catService.findIdeeByCategorie(idCat).forEach(element -> {result.add(this.iService.getById(element));});
 		return result;
 	}
 
